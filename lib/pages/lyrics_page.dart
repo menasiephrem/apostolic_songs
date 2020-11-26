@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../finder.dart';
 

@@ -54,7 +54,7 @@ class _LyricsListItemState extends State<LyricsListItem> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(this.widget.lyrics.id),
+                  Text("${this.widget.lyrics.trackNumber}"),
                   Text(this.widget.lyrics.lyricTitle),
                   InkWell(
                     child: isFav? Icon( Icons.favorite, color: Colors.amber,): Icon( Icons.favorite_border, color: Colors.amber,),
