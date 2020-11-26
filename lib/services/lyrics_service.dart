@@ -66,6 +66,8 @@ class LyricsService {
       final prefs = await SharedPreferences.getInstance();
       List<String> lyricsInPref = prefs.getKeys().toList();
 
+      lyricsInPref.removeWhere((st) => st == "theme");
+
       for(String key in lyricsInPref){
         var lyric = allLyrics.firstWhere((l) => l.id == key);
         if(lyric != null){
