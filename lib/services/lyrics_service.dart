@@ -68,7 +68,6 @@ class LyricsService {
 
       for(String key in lyricsInPref){
         var lyric = allLyrics.firstWhere((l) => l.id == key);
-        print(lyric);
         if(lyric != null){
           var album = allAlbums.firstWhere((a) => a.albumId == lyric.albumId);
           lyric.lryicArtist = album.albumArtist;
@@ -77,5 +76,21 @@ class LyricsService {
       }
       return fav;
     }
+
+    Future<List<Lyrics>> searchLyrics(BuildContext context, String query) async {
+      List<Lyrics> ret = List();
+      var regex = RegExp(r''+ query, caseSensitive: false);
+      var allAlbums = await _getAlbums(context);
+      List<Lyrics> allLyrics = await getAllLyric(context);
+      var serachLyris =  allLyrics.where((l) => l.lyricTitle.contains(regex)).toList();
+
+      for(Lyrics lyric in serachLyris){
+          var album = allAlbums.firstWhere((a) => a.albumId == lyric.albumId);
+          lyric.lryicArtist = album.albumArtist;
+          ret.add((lyric));
+      }
+
+      return ret;
+   }
   
   }

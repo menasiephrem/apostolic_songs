@@ -1,5 +1,6 @@
 import 'package:apostolic_songs/pages/fav_page.dart';
 import 'package:apostolic_songs/pages/solo_albums_list.dart';
+import 'package:apostolic_songs/widgets/serach.dart';
 import 'package:flutter/material.dart';
 
 import 'chor_albums_list.dart';
@@ -39,7 +40,19 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("የጽዮን መዝሙሮች"),
+        actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: CustomSearchDelegate(),
+                );
+              },
+            ),
+          ],
       ),
+      
       body: _renderBody(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

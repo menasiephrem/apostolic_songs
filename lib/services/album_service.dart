@@ -18,12 +18,6 @@ class AlbumService {
     return fromJson;
   }
 
-  Future<List<Album>> searchAlbums(BuildContext context, String query) async {
-      var regex = RegExp(r''+ query, caseSensitive: false);
-      var allAlbums = await getAlbums(context);
-      return  allAlbums.where((album) => album.albumTitle.contains(regex)).toList();
-  }
-
   Future<List<Album>> getSoloOrChorAlbums(BuildContext context, bool solo) async {
       List<Album> allAlbums = await getAlbums(context);
       return allAlbums.where((album) => album.isSolo == (solo ? "1": "0")).toList();
