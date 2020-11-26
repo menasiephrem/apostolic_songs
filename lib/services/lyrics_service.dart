@@ -1,11 +1,23 @@
 
 import 'dart:convert';
 
+import 'package:apostolic_songs/models/album.dart';
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LyricsService {
+
+  Future<List<Album>> _getAlbums(BuildContext context) async{
+    List<Album> fromJson = List();
+    var value = await DefaultAssetBundle.of(context)
+        .loadString("data/Album.json");
+        var albumsJson = json.decode(value);   
+        for(var album in albumsJson){
+          fromJson.add(Album.fromJson(album));
+        }
+    return fromJson;
+  }
 
     Future<List<Lyrics>> getAllLyric(BuildContext context) async{
       List<Lyrics> fromJson = List();
@@ -33,7 +45,11 @@ class LyricsService {
 
     setFav(Lyrics lyrics, bool isFaV) async {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setBool("${lyrics.id}", isFaV);
+      if(isFaV){
+        await prefs.setBool("${lyrics.id}", isFaV);
+      }else{
+        await prefs.remove("${lyrics.id}");
+      }
       return isFaV;
     }
 
@@ -43,8 +59,23 @@ class LyricsService {
       return fav == null? false : fav;
     }
 
-    Future<List<Lyrics>> getFav() async {
+    Future<List<Lyrics>> getFav(BuildContext context) async {
+      List<Lyrics> fav = List();
+      List<Lyrics> allLyrics = await getAllLyric(context);
+      List<Album> allAlbums = await _getAlbums(context);
+      final prefs = await SharedPreferences.getInstance();
+      List<String> lyricsInPref = prefs.getKeys().toList();
 
+      for(String key in lyricsInPref){
+        var lyric = allLyrics.firstWhere((l) => l.id == key);
+        print(lyric);
+        if(lyric != null){
+          var album = allAlbums.firstWhere((a) => a.albumId == lyric.albumId);
+          lyric.lryicArtist = album.albumArtist;
+          fav.add((lyric));
+        }
+      }
+      return fav;
     }
   
   }

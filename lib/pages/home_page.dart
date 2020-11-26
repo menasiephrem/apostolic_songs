@@ -1,3 +1,4 @@
+import 'package:apostolic_songs/pages/fav_page.dart';
 import 'package:apostolic_songs/pages/solo_albums_list.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
        return SoloAlbumsList();
       case 2:
-       return Text("Fav");
+       return FavLyricsList();
       default:
       return Text("");
     }
