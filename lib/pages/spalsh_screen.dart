@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:apostolic_songs/pages/home_page.dart';
+import 'package:apostolic_songs/widgets/theme_changer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 
 class HomeSplashScreen extends StatefulWidget {
@@ -32,6 +34,8 @@ class _HomeSplashScreenState extends State<HomeSplashScreen> with TickerProvider
   }
   @override
 Widget build(BuildContext context) {
+    var _themeProvider = Provider.of<ThemeChanger>(context);
+    ThemeData mode = _themeProvider.getTheme;
     return Scaffold(
       body:  InkWell(
         child: Stack(
@@ -40,7 +44,7 @@ Widget build(BuildContext context) {
              Container(
               decoration:  BoxDecoration(
                 gradient: RadialGradient(
-                    colors: [const Color(0xffCCCCCC), const Color(0xffffffff),],
+                    colors: mode.brightness == Brightness.dark ? [const Color(0xff222222), const Color(0xff000000),] : [const Color(0xffCCCCCC), const Color(0xffffffff),],
                     radius: 1.5,
                      ),
               ),
