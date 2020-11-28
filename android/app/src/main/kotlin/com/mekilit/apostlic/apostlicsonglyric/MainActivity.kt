@@ -1,4 +1,4 @@
-package com.mekilit.apostlic.apostlicsonglyric.apostolic_songs
+package com.mekilit.apostlic.apostlicsonglyric
 
 import io.flutter.embedding.android.FlutterActivity
 
