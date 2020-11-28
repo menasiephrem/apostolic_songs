@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../finder.dart';
 
@@ -30,6 +31,7 @@ class _LyricsPageState extends State<LyricsPage> {
         lyrics = this.widget.lyrics;
       });
       _isFav();
+      _getScaleConfig();
     }
 
     _isFav() async {
@@ -43,6 +45,26 @@ class _LyricsPageState extends State<LyricsPage> {
       await _lyricsService.setFav(this.widget.lyrics, !isFav);
       setState(() {
         isFav = !isFav;
+      });
+    }
+
+    _updateScaleFactor(double scale){
+       setState(() {
+          _scaleFactor = _baseScaleFactor * scale;
+      });
+      _saveScaleConfig(scale);
+    }
+
+    _saveScaleConfig(double scale) async {
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setDouble('font', _scaleFactor);
+    }
+
+     _getScaleConfig() async {
+      final prefs = await SharedPreferences.getInstance();
+      double scale = prefs.getDouble('font');
+      setState(() {
+        _scaleFactor = scale == null? 1 : scale;
       });
     }
 
@@ -74,9 +96,7 @@ class _LyricsPageState extends State<LyricsPage> {
                     _baseScaleFactor = _scaleFactor;
                   },
                   onScaleUpdate: (details) {
-                     setState(() {
-                      _scaleFactor = _baseScaleFactor * details.scale;
-                    });
+                    _updateScaleFactor(details.scale);
                   },
                   child: Text(lyrics.lyricText, textAlign: TextAlign.center, textScaleFactor: _scaleFactor, ),
                 ),

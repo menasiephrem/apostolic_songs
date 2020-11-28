@@ -67,6 +67,7 @@ class LyricsService {
       List<String> lyricsInPref = prefs.getKeys().toList();
 
       lyricsInPref.removeWhere((st) => st == "theme");
+      lyricsInPref.removeWhere((st) => st == "font");
 
       for(String key in lyricsInPref){
         var lyric = allLyrics.firstWhere((l) => l.id == key);

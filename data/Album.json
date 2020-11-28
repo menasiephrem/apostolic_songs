@@ -527,7 +527,7 @@
   {
     "albumId": "hosana1",
     "albumTitle": "ሃሌሉያ",
-    "albumArtist": "የሆሳእና ማራናታ መዘምራን",
+    "albumArtist": "የሆሳዕና ማራናታ መዘምራን",
     "albumArt": "/images/hosana1.jpg",
     "isSolo": "0"
   },
@@ -547,8 +547,8 @@
   },
   {
     "albumId": "hosana2",
-    "albumTitle": "ማራናታ",
-    "albumArtist": "የሆሳእና ማራናታ መዘምራን",
+    "albumTitle": "ኢየሱስ ሆይ ና!",
+    "albumArtist": "የሆሳዕና ማራናታ መዘምራን",
     "albumArt": "/images/hosana2.jpg",
     "isSolo": "0"
   }
