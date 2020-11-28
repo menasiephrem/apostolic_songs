@@ -8,9 +8,8 @@ import '../finder.dart';
 
 
 class LyricsPage extends StatefulWidget {
-  LyricsPage(this.lyrics, this.artist);
+  LyricsPage(this.lyrics);
   final Lyrics lyrics;
-  final String artist;
   @override
   _LyricsPageState createState() => _LyricsPageState();
 }
@@ -21,10 +20,15 @@ class _LyricsPageState extends State<LyricsPage> {
   bool isFav = false;
   double _scaleFactor = 1.0;
   double _baseScaleFactor = 1.0;
+  Lyrics lyrics;
+  bool loading = false;
 
     @override
     void initState() { 
       super.initState();
+      setState(() {
+        lyrics = this.widget.lyrics;
+      });
       _isFav();
     }
 
@@ -41,20 +45,21 @@ class _LyricsPageState extends State<LyricsPage> {
         isFav = !isFav;
       });
     }
-  
+
   @override
   Widget build(BuildContext context) {
-    final lyrics = widget.lyrics;
     return Scaffold(
       appBar: AppBar(
        title: Column(
           crossAxisAlignment: Platform.isAndroid? CrossAxisAlignment.start: CrossAxisAlignment.center,
           children: [
             Text(lyrics.lyricTitle, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            Text(this.widget.artist, style: TextStyle(fontSize: 16))
+            Text(lyrics.lryicArtist, style: TextStyle(fontSize: 16))
         ],),
       ),
-      body:Container(
+      body:
+      loading? Center(child: CircularProgressIndicator(),):
+      Container(
        alignment: Alignment.topCenter,
        padding: EdgeInsets.only(top: 16),
        child: Flex(
@@ -69,11 +74,6 @@ class _LyricsPageState extends State<LyricsPage> {
                     _baseScaleFactor = _scaleFactor;
                   },
                   onScaleUpdate: (details) {
-                     if (details.focalPoint.dx > 0) {
-                      print("Right");
-                    } else {
-                      print("left");
-                    }
                      setState(() {
                       _scaleFactor = _baseScaleFactor * details.scale;
                     });

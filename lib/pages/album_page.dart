@@ -42,13 +42,14 @@ class _AlbumPageState extends State<AlbumPage> {
       return allLyrics
               .map<Widget>(
                 (lyrics) => 
-                  LyricsListItem(lyrics, () => {
+                  LyricsListItem(lyrics, (){
+                    lyrics.lryicArtist = this.widget.album.albumArtist;
                     Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LyricsPage(lyrics, this.widget.album.albumArtist),
+                        MaterialPageRoute(builder: (context) => LyricsPage(lyrics),
                     )).then((_){
                        _loadLyrics();
-                    })
+                    });
                   })
               )
               .toList();

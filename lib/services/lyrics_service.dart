@@ -93,6 +93,16 @@ class LyricsService {
       }
 
       return ret;
-   }
+    }
+
+    Future<Lyrics> loadLyrics(BuildContext context, int id) async {
+      print(id);
+      var allAlbums = await _getAlbums(context);
+      List<Lyrics> allLyrics = await getAllLyric(context);
+      var lyric = allLyrics.firstWhere((l) => l.id == "$id");
+      var album = allAlbums.firstWhere((a) => a.albumId == lyric.albumId);
+      lyric.lryicArtist = album.albumArtist;
+      return lyric;
+    }
   
   }
