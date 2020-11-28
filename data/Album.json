@@ -544,5 +544,12 @@
     "albumArtist": "ፍሰሃ ሙሉጌታ እና ብርሃኑ",
     "albumArt": "/images/fishbermul.jpg",
     "isSolo": "0"
+  },
+  {
+    "albumId": "hosana2",
+    "albumTitle": "ማራናታ",
+    "albumArtist": "የሆሳእና ማራናታ መዘምራን",
+    "albumArt": "/images/hosana2.jpg",
+    "isSolo": "0"
   }
 ]
