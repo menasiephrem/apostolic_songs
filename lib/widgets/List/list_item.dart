@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../theme_changer.dart';
 
 class ListItem extends StatefulWidget {
  const ListItem(this.title, this.subtitle, this.imaAddress, this.callback);
@@ -22,11 +25,8 @@ class _ListItemState extends State<ListItem> {
 
   buildAvater(String imagAddress){
     return  CircleAvatar(
-              backgroundColor: Colors.transparent,
-              child:  Container(
-                  child: Image.asset('assets$imagAddress'),
-              ),
-              radius: 25.0,
+              backgroundImage: AssetImage('assets$imagAddress'),
+              radius: 27.0,
             );
   }
 
@@ -35,6 +35,8 @@ class _ListItemState extends State<ListItem> {
   Widget build(BuildContext context) {
     String title = this.widget.title;
     String subtitle = this.widget.subtitle;
+    var _themeProvider = Provider.of<ThemeChanger>(context);
+    ThemeData mode = _themeProvider.getTheme;
     return 
     InkWell( 
       onTap: this.widget.callback,
@@ -66,7 +68,10 @@ class _ListItemState extends State<ListItem> {
             ],
           ),
           Padding( padding: const EdgeInsets.only(top: 3.0), ),
-          Divider(color: Colors.grey, height: 2,)
+          Padding( padding: const EdgeInsets.only(left: 65.0), child: 
+            Divider(color: Colors.grey[ mode.brightness == Brightness.dark ? 700: 400], height: 2,)
+          ),
+          
           ],
         ),
         ),

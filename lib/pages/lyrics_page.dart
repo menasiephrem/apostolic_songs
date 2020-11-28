@@ -19,6 +19,8 @@ class _LyricsPageState extends State<LyricsPage> {
   LyricsService _lyricsService = locator<LyricsService>();
 
   bool isFav = false;
+  double _scaleFactor = 1.0;
+  double _baseScaleFactor = 1.0;
 
     @override
     void initState() { 
@@ -62,7 +64,22 @@ class _LyricsPageState extends State<LyricsPage> {
             flex: 1,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: Text(lyrics.lyricText, textAlign: TextAlign.center, style: TextStyle(fontSize: 18), )
+              child: GestureDetector(
+                  onScaleStart: (details) {
+                    _baseScaleFactor = _scaleFactor;
+                  },
+                  onScaleUpdate: (details) {
+                     if (details.focalPoint.dx > 0) {
+                      print("Right");
+                    } else {
+                      print("left");
+                    }
+                     setState(() {
+                      _scaleFactor = _baseScaleFactor * details.scale;
+                    });
+                  },
+                  child: Text(lyrics.lyricText, textAlign: TextAlign.center, textScaleFactor: _scaleFactor, ),
+                ),
               ),
             ),
        ],) 
