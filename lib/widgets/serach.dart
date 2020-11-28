@@ -12,6 +12,10 @@ class CustomSearchDelegate extends SearchDelegate {
 LyricsService _lyricsService = locator<LyricsService>();
 
   @override
+  ThemeData appBarTheme(BuildContext context) => Theme.of(context);
+
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
