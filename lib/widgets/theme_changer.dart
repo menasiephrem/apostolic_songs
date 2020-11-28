@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 var darkTheme = ThemeData.dark();
 var lightTheme= ThemeData(
         primaryColor: Colors.grey,
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       );
 

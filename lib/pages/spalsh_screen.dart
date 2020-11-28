@@ -64,10 +64,7 @@ Widget build(BuildContext context) {
                            Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                           ),
-                           AnimatedBuilder(animation: animation, builder: (BuildContext context, Widget chile){
-                              return Transform.translate(
-                                offset: Offset(animation.value, 0),
-                                child: Column(
+                          Column(
                                   children: [
                                    CircleAvatar(
                                       backgroundColor: Colors.transparent,
@@ -80,9 +77,7 @@ Widget build(BuildContext context) {
                                       padding: const EdgeInsets.only(top: 10.0),
                                    ),
                                    Text("በማስተዋል ዘምሩ", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
-                                ],)  
-                              );
-                            }),
+                                ],)
                         ],
                       )),
                 ),
