@@ -1,15 +1,14 @@
 import 'package:apostolic_songs/models/lyrics.dart';
+import 'package:apostolic_songs/pages/lyrics_page.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../finder.dart';
 
 class LyricsListItem extends StatefulWidget {
-  LyricsListItem(this.lyrics, this.callback);
+  LyricsListItem(this.lyrics);
 
   final Lyrics lyrics;
-  final VoidCallback callback;
-
   @override
   _LyricsListItemState createState() => _LyricsListItemState();
 }
@@ -43,7 +42,14 @@ class _LyricsListItemState extends State<LyricsListItem> {
   Widget build(BuildContext context) {
     return 
     InkWell(
-      onTap: this.widget.callback,
+      onTap: (){
+         Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LyricsPage(this.widget.lyrics),
+        )).then((_){
+            _isFav();
+        });
+      },
       child:
       Container(
         height: 40,

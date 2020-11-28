@@ -41,16 +41,10 @@ class _AlbumPageState extends State<AlbumPage> {
     _genrateSongListItem(BuildContext context) {
       return allLyrics
               .map<Widget>(
-                (lyrics) => 
-                  LyricsListItem(lyrics, (){
-                    lyrics.lryicArtist = this.widget.album.albumArtist;
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LyricsPage(lyrics),
-                    )).then((_){
-                       _loadLyrics();
-                    });
-                  })
+                (lyrics){
+                  lyrics.lryicArtist = this.widget.album.albumArtist;
+                  return LyricsListItem(lyrics);
+                }
               )
               .toList();
     }
