@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:apostolic_songs/models/album.dart';
 import 'package:apostolic_songs/models/lyrics.dart';
-import 'package:apostolic_songs/pages/lyrics_page.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:apostolic_songs/widgets/List/song_list_item.dart';
 import 'package:flutter/material.dart';
