@@ -75,15 +75,15 @@ class _HomePageState extends State<HomePage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
-            title: Text('የህብረት'),
+            label: 'የህብረት',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text('የግል'),
+            label: 'የግል',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite ),
-            title: Text('የተመረጡ'),
+            label: 'የተመረጡ',
           )
         ],
         currentIndex: _selectedIndex,

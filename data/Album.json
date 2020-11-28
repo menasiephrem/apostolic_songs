@@ -1,937 +1,548 @@
 [
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8654a"
-    },
     "albumId": "Aylew1",
     "albumTitle": "አምኜው ነው የተከተልኩት",
     "albumArtist": "አያሌው",
     "albumArt": "/images/aylew1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8654b"
-    },
     "albumId": "Aylew2",
     "albumTitle": "እሱን ታምኖ",
     "albumArtist": "አያሌው",
     "albumArt": "/images/aylew2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8654c"
-    },
     "albumId": "AberhamA1",
     "albumTitle": "ገና እንበዛለን ገና",
     "albumArtist": "አብርሃም አጌና",
     "albumArt": "/images/aberhama1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8654d"
-    },
     "albumId": "AberhamT1",
     "albumTitle": "አድርገህልኛል",
     "albumArtist": "አብርሃምና እያሱ ተ/ማርያም",
     "albumArt": "/images/aberhamt1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8654e"
-    },
     "albumId": "AberhamT2",
     "albumTitle": "ዘመናት አይለውጡትም",
     "albumArtist": "አብርሃምና እያሱ ተ/ማርያም",
     "albumArt": "/images/aberhamt2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": "5aa3a722aa49180026164263",
-    "last_modified": "2018-03-10T09:37:19.384Z",
-    "date_created": "2018-03-10T09:36:34.760Z",
     "albumId": "Baharu1",
     "albumTitle": "ቃልህ እውነት ነው",
     "albumArtist": "ባህሩ ኬሼቦ",
-    "isSolo": "1",
-    "__v": 0,
-    "albumArt": "/images/baharu1.jpg"
+    "albumArt": "/images/baharu1.jpg",
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8654f"
-    },
     "albumId": "Betty1",
     "albumTitle": "እኔን የሚገርመኝ ኢየሱስ",
     "albumArtist": "ቤቴልሄም አጥናፉ",
     "albumArt": "/images/betty1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86550"
-    },
     "albumId": "Betty2",
     "albumTitle": "ኢየሱስ ይመጣል ",
     "albumArtist": "ቤቴልሄም አጥናፉ",
     "albumArt": "/images/betty2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86551"
-    },
     "albumId": "Betty3",
     "albumTitle": "ክብሩን ይውሰድ",
     "albumArtist": "ቤቴልሄም አጥናፉ",
     "albumArt": "/images/betty3.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86552"
-    },
     "albumId": "Berhanu1",
     "albumTitle": "አምላኬ እግዚአብሔር አንድ ነው",
     "albumArtist": "ብርሀኑ ተክሌ",
     "albumArt": "/images/berhanu1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86553"
-    },
     "albumId": "Berhanu2",
     "albumTitle": "አለን መልካም እረኛ",
     "albumArtist": "ብርሀኑ ተክሌ",
     "albumArt": "/images/berhanu2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86554"
-    },
     "albumId": "Berhanu3",
     "albumTitle": "ክብረህ እንይህ ጌታ ሆይ",
     "albumArtist": "ብርሀኑ ተክሌ",
     "albumArt": "/images/berhanu3.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86555"
-    },
     "albumId": "Berhanu4",
     "albumTitle": "ባንተ ነው ኢየሱስ",
     "albumArtist": "ብርሀኑ ተክሌ",
     "albumArt": "/images/berhanu4.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": "5d5a3994c1875a0026cdd80f",
-    "last_modified": "2019-08-19T06:17:50.712Z",
-    "date_created": "2019-08-19T05:54:28.439Z",
     "albumId": "Berhanu5",
     "albumTitle": "ዘመኔ አንተን በመፍራት ይለቅ",
     "albumArtist": "ብርሀኑ ተክሌ",
-    "isSolo": "1",
-    "__v": 0,
-    "albumArt": "/images/berhanu5.jpg"
+    "albumArt": "/images/berhanu5.jpg",
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86556"
-    },
     "albumId": "Carol1",
     "albumTitle": "የሕይወቴን ጅማሬ",
     "albumArtist": "ካሮል ፈቃደ",
     "albumArt": "/images/carol1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86557"
-    },
     "albumId": "Carol2",
     "albumTitle": "ሕይወቱን ልኖረው",
     "albumArtist": "ካሮል ፈቃደ",
     "albumArt": "/images/carol2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86558"
-    },
     "albumId": "Elfu1",
     "albumTitle": "እግዚአብሔር መሃሪ ይቅር ባይ",
     "albumArtist": "እልፉ ኩርፉ",
     "albumArt": "/images/elfu1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86559"
-    },
     "albumId": "Elfu2",
     "albumTitle": "እናመሰግንሃለን",
     "albumArtist": "እልፉ ኩርፉ",
     "albumArt": "/images/elfu2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8655a"
-    },
     "albumId": "Elfu3",
     "albumTitle": "አለው ሕዝብ እግዚአብሔር",
     "albumArtist": "እልፉ ኩርፉ",
     "albumArt": "/images/elfu3.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": "5aa2c1c7aa49180026164262",
-    "last_modified": "2018-03-10T08:10:32.361Z",
-    "date_created": "2018-03-09T17:17:59.014Z",
     "albumId": "Eyasu1",
     "albumTitle": "From Every Nation",
     "albumArtist": "እያሱ ተ/ማርያም",
-    "isSolo": "1",
-    "__v": 0,
-    "albumArt": "/images/eyasu1.jpg"
+    "albumArt": "/images/eyasu1.jpg",
+    "isSolo": "1"
   },
   {
-    "_id": "5aa3a7e2aa49180026164264",
-    "last_modified": "2018-03-10T09:40:31.504Z",
-    "date_created": "2018-03-10T09:39:46.222Z",
     "albumId": "Fekere1",
     "albumTitle": "የወንጌል አርበኛ",
     "albumArtist": "ፍቅረ ወንጌል አዲሴ",
-    "isSolo": "1",
-    "__v": 0,
-    "albumArt": "/images/fekere1.jpg"
+    "albumArt": "/images/fekere1.jpg",
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8655b"
-    },
     "albumId": "Jerry1",
     "albumTitle": "ከምንም በላይ መዳኔ ይበልጣል",
     "albumArtist": "ኢየሩሳሌም ሞላ",
     "albumArt": "/images/jerry1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8655c"
-    },
     "albumId": "Erkenesh1",
     "albumTitle": "ኢየሱስ ብቻ",
     "albumArtist": "እርቅነሽ ሰጋሮ",
     "albumArt": "/images/erkenesh1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8655d"
-    },
     "albumId": "EbenzerM1",
     "albumTitle": "ሊመጣ ያለው ይመጣል",
     "albumArtist": "አቤንኤዘር መኩሪያ",
     "albumArt": "/images/ebenzerm1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8655e"
-    },
     "albumId": "Fish1",
     "albumTitle": "ኑ ልንገራችሁ",
     "albumArtist": "ፍስሃ ይርጋ",
     "albumArt": "/images/fish1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8655f"
-    },
     "albumId": "Fish2",
     "albumTitle": "ጠላት እስከ መቼ",
     "albumArtist": "ፍስሃ ይርጋ",
     "albumArt": "/images/fish2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86560"
-    },
     "albumId": "Fekade1",
     "albumTitle": "አምላክ አለኝ የማመልከው",
     "albumArtist": "ፍቃደ ደስታ",
     "albumArt": "/images/fekade1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86561"
-    },
     "albumId": "Gedion1",
     "albumTitle": "እጆቹ ለሰሩት",
     "albumArtist": "ጌዴዎን አዲስ",
     "albumArt": "/images/gedion1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86562"
-    },
     "albumId": "Gedion2",
     "albumTitle": "የጸሎት ቤት",
     "albumArtist": "ጌዴዎን አዲስ",
     "albumArt": "/images/gedion2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86563"
-    },
     "albumId": "Gedion3",
     "albumTitle": "ቤቴን አደመቀው",
     "albumArtist": "ጌዴዎን አዲስ",
     "albumArt": "/images/gedion3.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86564"
-    },
     "albumId": "Habtamu1",
     "albumTitle": "ፍጹም ከሰማይ ነው",
     "albumArtist": "ሀብታሙ ያለው",
     "albumArt": "/images/habtamu1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86565"
-    },
     "albumId": "Habtamu2",
     "albumTitle": "አልልም ዓለት ነው",
     "albumArtist": "ሀብታሙ ያለው",
     "albumArt": "/images/habtamu2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86566"
-    },
     "albumId": "HabtamuL1",
     "albumTitle": "ባንተ ይቻላል",
     "albumArtist": "ሀብታሙ ለገሰ",
     "albumArt": "/images/habtamul1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86567"
-    },
     "albumId": "Hana1",
     "albumTitle": "አንተን ብዬ",
     "albumArtist": "ሐና መለሰ",
     "albumArt": "/images/hana1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86568"
-    },
     "albumId": "Liya1",
     "albumTitle": "ካልባረከኝ አልለቅህም",
     "albumArtist": "ሊያና ነጻነት ታደሰ",
     "albumArt": "/images/liya1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86569"
-    },
     "albumId": "Menber1",
     "albumTitle": "ጉልበት ሁሉ ይንበርከክለት",
     "albumArtist": "መንበረ ተሾመ",
     "albumArt": "/images/menber1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8656a"
-    },
     "albumId": "Menber2",
     "albumTitle": "የሚዱንትን በኛ ላይ ጨምር",
     "albumArtist": "መንበረ ተሾመ",
     "albumArt": "/images/menber2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8656b"
-    },
     "albumId": "MesertB1",
     "albumTitle": "ዛሬም አለኝ ምስጋና",
     "albumArtist": "መሰረት በላይ",
     "albumArt": "/images/mesertb1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8656c"
-    },
     "albumId": "MesertB2",
     "albumTitle": "ይውረድ መሰንቆዬ",
     "albumArtist": "መሰረት በላይ",
     "albumArt": "/images/mesertb2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8656d"
-    },
     "albumId": "MesertK1",
     "albumTitle": "አንድ ቀን",
     "albumArtist": "መሰረት ቀጀላ",
     "albumArt": "/images/mesertk1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8656e"
-    },
     "albumId": "Mulugeta1",
     "albumTitle": "በልዑል መጠጊያ",
     "albumArtist": "ሙሉጌታ ዮሃንስ",
     "albumArt": "/images/mulugeta1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8656f"
-    },
     "albumId": "Mulugeta2",
     "albumTitle": "ቃልህን አምነዋለሁ",
     "albumArtist": "ሙሉጌታ ዮሃንስ",
     "albumArt": "/images/mulugeta2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86570"
-    },
     "albumId": "MuluKen1",
     "albumTitle": "ኢየሱስ ሰራቶኞችን ላክ",
     "albumArtist": "ሙሉቀን ተክሌ",
     "albumArt": "/images/muluken1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86571"
-    },
     "albumId": "Meselch1",
     "albumTitle": "ሰው ቢችል",
     "albumArtist": "መሰለች አዘነ",
     "albumArt": "/images/meselch1.png",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86572"
-    },
     "albumId": "Samson1",
     "albumTitle": "የድል ነሺ ድምጽ",
     "albumArtist": "ሳምሶን አደፍርስ",
     "albumArt": "/images/samson1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86573"
-    },
     "albumId": "Sara1",
     "albumTitle": "በሌላ አይሁን",
     "albumArtist": "ሳራ ደምሰው",
     "albumArt": "/images/sara1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": "5d5a6da1c1875a0026cdd911",
-    "last_modified": "2019-08-19T09:37:04.865Z",
-    "date_created": "2019-08-19T09:36:33.922Z",
     "albumId": "Sebele1",
     "albumTitle": "ፍለጋዬ አንተ ነህ",
     "albumArtist": "ሰብለ አለማየሁ",
-    "isSolo": "1",
-    "__v": 0,
-    "albumArt": "/images/sebele1.jpg"
+    "albumArt": "/images/sebele1.jpg",
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86574"
-    },
     "albumId": "Sol1",
     "albumTitle": "ኃያል ነህ ብርቱ",
     "albumArtist": "ሰለሞን ተክሌ",
     "albumArt": "/images/sol1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86575"
-    },
     "albumId": "Tadne1",
     "albumTitle": "ያያልበ ዙፋን ያለው",
     "albumArtist": "ታድን እንግዳ",
     "albumArt": "/images/tadne1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86576"
-    },
     "albumId": "Tewlde1",
     "albumTitle": "የድል ሽታ",
     "albumArtist": "ተወልደ አበባየሁ",
     "albumArt": "/images/tewlde1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86577"
-    },
     "albumId": "Teru1",
     "albumTitle": "ቀን ለቀን ነገርን ታወጣለች",
     "albumArtist": "ጥሩነሽ በቀለ",
     "albumArt": "/images/teru1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86578"
-    },
     "albumId": "Wegene1",
     "albumTitle": "ምስጋናዬን አላቆምም",
     "albumArtist": "ወገኔ አለማየሁ",
     "albumArt": "/images/wegene1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86579"
-    },
     "albumId": "Yemserach1",
     "albumTitle": "ለክብርህ ካልሆነ መኖሬ",
     "albumArtist": "የምስራች ገ/ሚካኤል",
     "albumArt": "/images/yemserach1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8657a"
-    },
     "albumId": "Yemserach2",
     "albumTitle": "ማደሪያዎችህ",
     "albumArtist": "የምስራች ገ/ሚካኤል",
     "albumArt": "/images/yemserach2.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8657b"
-    },
     "albumId": "Yesal1",
     "albumTitle": "ሲያቅላላ ሊነጋ ነው",
     "albumArtist": "ይሳለሙሽ ከበደ",
     "albumArt": "/images/yesal1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8657c"
-    },
     "albumId": "Zenbech1",
     "albumTitle": "ኢትዮጵያን እግዚአብሔር ይባርክ",
     "albumArtist": "ዘነበች መህዲ",
     "albumArt": "/images/zenbech1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8657d"
-    },
     "albumId": "hebret1",
     "albumTitle": "የሚመካ በእግዚአብሔር ይመካ",
     "albumArtist": "ሕብረት ቁጥር1",
     "albumArt": "/images/hebret1.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8657e"
-    },
     "albumId": "hebret2",
     "albumTitle": "ምስጋና  ሃሌሉያ",
     "albumArtist": "ሕብረት ቁጥር2",
     "albumArt": "/images/hebret2.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8657f"
-    },
     "albumId": "hebret3",
     "albumTitle": "የሠራዊት አምላክ ሆይ",
     "albumArtist": "ሕብረት ቁጥር3",
     "albumArt": "/images/hebret3.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86580"
-    },
     "albumId": "hebret4",
     "albumTitle": "ውለታው በዝቶብኛል",
     "albumArtist": "ሕብረት ቁጥር4",
     "albumArt": "/images/hebret4.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86581"
-    },
     "albumId": "hebret5",
     "albumTitle": "ማነህ አንተ ሰው የተሰቀልከው",
     "albumArtist": "ሕብረት ቁጥር5",
     "albumArt": "/images/hebret5.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86582"
-    },
     "albumId": "hebret6",
     "albumTitle": "በሰማይ በዙፋን ላይ",
     "albumArtist": "ሕብረት ቁጥር6",
     "albumArt": "/images/hebret6.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86583"
-    },
     "albumId": "hebret7",
     "albumTitle": "ሕይወት እውነት የሆነው ቃሌ",
     "albumArtist": "ሕብረት ቁጥር7",
     "albumArt": "/images/hebret7.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86584"
-    },
     "albumId": "hebret8",
     "albumTitle": "የእውነት ወንጌል በዓለም",
     "albumArtist": "ሕብረት ቁጥር8",
     "albumArt": "/images/hebret8.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86585"
-    },
     "albumId": "hebret11",
     "albumTitle": "ምስጋናው ይነሳ",
     "albumArtist": "ሕብረት ቁጥር11",
     "albumArt": "/images/hebret11.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86586"
-    },
     "albumId": "hebret12",
     "albumTitle": "ዝራው ዘሩን በትነው",
     "albumArtist": "ሕብረት ቁጥር12",
     "albumArt": "/images/hebret12.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86587"
-    },
     "albumId": "hebret13",
     "albumTitle": "ንገቲምዱ አጋና መዳናችን ድንቅ",
     "albumArtist": "ሕብረት ቁጥር13",
     "albumArt": "/images/hebret13.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86588"
-    },
     "albumId": "hebret14",
     "albumTitle": "የቀናውን መንፈስ",
     "albumArtist": "ሕብረት ቁጥር14",
     "albumArt": "/images/hebret14.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86589"
-    },
     "albumId": "hebret15",
     "albumTitle": "አምላኬ ክብር ዘምራለሁ",
     "albumArtist": "ሕብረት ቁጥር15",
     "albumArt": "/images/hebret15.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8658a"
-    },
     "albumId": "hebret16",
     "albumTitle": "አያለሁ ገና አሜን",
     "albumArtist": "ሕብረት ቁጥር16",
     "albumArt": "/images/hebret16.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8658b"
-    },
     "albumId": "hebret17",
     "albumTitle": "እንሄዳለን እዚሁ ዘምረን",
     "albumArtist": "ሕብረት ቁጥር17",
     "albumArt": "/images/hebret17.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8658c"
-    },
     "albumId": "hebret18",
     "albumTitle": "ሰላም ለአንተ ይሁን",
     "albumArtist": "ሕብረት ቁጥር18",
     "albumArt": "/images/hebret18.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8658d"
-    },
     "albumId": "bebereya",
     "albumTitle": "ከጥንትም የነበረው",
     "albumArtist": "የኦክላንድ መዘምራን",
     "albumArt": "/images/bebereya.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8658e"
-    },
     "albumId": "wedding1",
     "albumTitle": "ጋብቻ ክቡር ቅዱስ",
     "albumArtist": " የጋብቻ መዝሙር",
     "albumArt": "/images/wedding1.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d8658f"
-    },
     "albumId": "kehulu1",
     "albumTitle": "ከሁሉ በላይ",
     "albumArtist": "የህብረት መዝሙር",
     "albumArt": "/images/kehulu1.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86590"
-    },
     "albumId": "hosana1",
     "albumTitle": "ሃሌሉያ",
     "albumArtist": "የሆሳእና ማራናታ መዘምራን",
     "albumArt": "/images/hosana1.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86591"
-    },
     "albumId": "EbenzerF1",
     "albumTitle": "እጅህ በእኔ ትሁን",
     "albumArtist": "አቤንኤዘር ፈቃዱ",
     "albumArt": "/images/ebenzerf1.jpg",
-    "isSolo": "1",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": {
-      "$date": {
-        "$numberLong": "1541398123293"
-      }
-    }
+    "isSolo": "1"
   },
   {
-    "_id": {
-      "$oid": "5a96c554b1d5600477d86592"
-    },
     "albumId": "fishbermul",
     "albumTitle": "ባለብዙ ክብር",
     "albumArtist": "ፍሰሃ ሙሉጌታ እና ብርሃኑ",
     "albumArt": "/images/fishbermul.jpg",
-    "isSolo": "0",
-    "date_created": "2018-01-09 18:13:52",
-    "last_modified": "2018-01-09 18:13:52"
+    "isSolo": "0"
   }
 ]
