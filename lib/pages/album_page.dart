@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:apostolic_songs/models/album.dart';
 import 'package:apostolic_songs/models/lyrics.dart';
@@ -53,7 +52,7 @@ class _AlbumPageState extends State<AlbumPage> {
     return Scaffold(
       appBar: AppBar(
         title: Column(
-          crossAxisAlignment: Platform.isAndroid? CrossAxisAlignment.start: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(this.widget.album.albumTitle, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Text(this.widget.album.albumArtist, style: TextStyle(fontSize: 16))

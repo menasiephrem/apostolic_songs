@@ -1,4 +1,4 @@
-import 'dart:io';
+
 
 import 'package:apostolic_songs/models/Artist.dart';
 import 'package:apostolic_songs/models/album.dart';
@@ -41,7 +41,7 @@ class _ArtistPageState extends State<ArtistPage> {
     return  Scaffold(
       appBar: AppBar(
         title: Column(
-          crossAxisAlignment: Platform.isAndroid? CrossAxisAlignment.start: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(this.widget.artist.artistName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Text(this.widget.artist.albumCount > 1? "${this.widget.artist.albumCount} አልበሞች" : "1 አልበም", style: TextStyle(fontSize: 16))

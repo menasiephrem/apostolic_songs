@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
@@ -73,7 +72,7 @@ class _LyricsPageState extends State<LyricsPage> {
     return Scaffold(
       appBar: AppBar(
        title: Column(
-          crossAxisAlignment: Platform.isAndroid? CrossAxisAlignment.start: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(lyrics.lyricTitle, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Text(lyrics.lryicArtist, style: TextStyle(fontSize: 16))
