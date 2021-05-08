@@ -8,7 +8,7 @@ class AlbumService {
 
 
   Future<List<Album>> getAlbums(BuildContext context) async{
-    List<Album> fromJson = List();
+    List<Album> fromJson= [];
     var value = await DefaultAssetBundle.of(context)
         .loadString("data/Album.json");
         var albumsJson = json.decode(value);   
@@ -29,7 +29,7 @@ class AlbumService {
   }
 
   Future<List<Artist>> getSoloArtists(BuildContext context) async {
-    List<Artist> ret = List();
+    List<Artist> ret= [];
     List<Album> allAlbums = await getSoloOrChorAlbums(context, true);
     Map<String, Artist> map = Map();
     allAlbums.forEach((album) {

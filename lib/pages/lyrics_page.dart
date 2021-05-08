@@ -4,6 +4,7 @@ import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:share/share.dart';
 
 import '../finder.dart';
 
@@ -68,6 +69,10 @@ class _LyricsPageState extends State<LyricsPage> {
       });
     }
 
+    String _prepareShareText() {
+      return "${lyrics.lyricTitle}\n\n${lyrics.lyricText}\n\n";
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +83,14 @@ class _LyricsPageState extends State<LyricsPage> {
             Text(lyrics.lyricTitle, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             Text(lyrics.lryicArtist, style: TextStyle(fontSize: 16))
         ],),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {
+              Share.share(_prepareShareText());
+            },
+          )
+        ]
       ),
       body:
       loading? Center(child: CircularProgressIndicator(),):
