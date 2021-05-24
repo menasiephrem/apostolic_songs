@@ -3,6 +3,8 @@ import 'package:apostolic_songs/widgets/seek_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:apostolic_songs/widgets/theme_changer.dart';
+import 'package:provider/provider.dart';
 
 class AudioControler extends StatelessWidget {
   const AudioControler(this.player, this.lyrics, this.playPause);
@@ -12,11 +14,14 @@ class AudioControler extends StatelessWidget {
   final Function playPause;
   @override
   Widget build(BuildContext context) {
+    var _themeProvider = Provider.of<ThemeChanger>(context);
+    ThemeData mode = _themeProvider.getTheme;
     PlayerState playerState = this.player.playerState;
     String title = this.lyrics.lyricTitle;
     String subtitle = this.lyrics.lryicArtist;
     return  Container(
           margin: const EdgeInsets.only(top: 0.0),
+          color: mode.brightness == Brightness.dark ? Colors.grey[800]: Colors.white,
           child: Column(children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

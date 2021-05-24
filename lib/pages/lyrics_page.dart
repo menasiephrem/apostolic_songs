@@ -30,6 +30,7 @@ class _LyricsPageState extends State<LyricsPage> {
   LyricsService _lyricsService = locator<LyricsService>();
 
 
+
   bool isFav = false;
   double _scaleFactor = 1.0;
   double _baseScaleFactor = 1.0;
@@ -40,6 +41,7 @@ class _LyricsPageState extends State<LyricsPage> {
   String downloadPath = "";
   AudioPlayer _audioPlayer;
   bool hideFab = false;
+  int downloadProgress = 0;
 
     @override
     void initState() { 
@@ -60,7 +62,9 @@ class _LyricsPageState extends State<LyricsPage> {
     @override
     void dispose() {
       IsolateNameServer.removePortNameMapping('downloader_send_port');
-      _audioPlayer.stop();
+      if(_audioPlayer != null){
+        _audioPlayer.stop();
+      }
       super.dispose();
     }
 
@@ -75,11 +79,15 @@ class _LyricsPageState extends State<LyricsPage> {
       _port.listen((dynamic data) {
         DownloadTaskStatus status = data[1];
         int progress = data[2];
-        if(progress > 85){
+        if(progress == 100){
           setState(() {
             showProgress = false;        
           });
         }
+        print(progress);
+        setState(() {
+            downloadProgress = progress;      
+        });
 
         if(status ==  DownloadTaskStatus.complete){
           Fluttertoast.showToast(
@@ -91,6 +99,22 @@ class _LyricsPageState extends State<LyricsPage> {
             textColor: Colors.white,
             fontSize: 16.0
           );
+        }
+
+        if(status == DownloadTaskStatus.failed){
+          print("data");
+          Fluttertoast.showToast(
+            msg: "Download Faild",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+          );
+          setState(() {
+              showProgress = false;
+          });
         }
       });
     }
@@ -132,17 +156,16 @@ class _LyricsPageState extends State<LyricsPage> {
     }
 
     String fileLocation(){
-        String albumid = lyrics.albumId;
-        String albumNumber = albumid.substring(albumid.length - 1);
-        String albumName = albumid.substring(0, albumid.length - 1);
+        String albumNumber = lyrics.albumId.replaceAll(new RegExp(r'[^0-9]'),'');
+        String albumName = lyrics.albumId.toLowerCase().replaceAll(new RegExp(r'[^a-z]'),'');
         return "$downloadPath/$albumName/$albumNumber/" + "${lyrics.trackNumber}.mp3";
     }
 
      void _requestDownload() async {
-        String albumid = lyrics.albumId;
-        String albumNumber = albumid.substring(albumid.length - 1);
-        String albumName = albumid.substring(0, albumid.length - 1);
+        String albumNumber = lyrics.albumId.replaceAll(new RegExp(r'[^0-9]'),'');
+        String albumName = lyrics.albumId.toLowerCase().replaceAll(new RegExp(r'[^a-z]'),'');
         String url = "https://res.cloudinary.com/evolunt/raw/upload/v1620205036/apostolicSongsMp3/$albumName/$albumNumber/${lyrics.trackNumber}.mp3";
+        print(url);
         var syncPath ="$downloadPath/$albumName/$albumNumber/";
         
         final savedDir = Directory(syncPath);
@@ -197,6 +220,7 @@ class _LyricsPageState extends State<LyricsPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
        title: Column(
@@ -239,14 +263,16 @@ class _LyricsPageState extends State<LyricsPage> {
                       ),
                     ),
                   ),
-                  ( showProgress ? CircularProgressIndicator() : Text("")),                    
+                  ( showProgress ? LinearProgressIndicator(value: (downloadProgress / 100)) : Text("") ),                    
             ],) 
           ),
          (
            isAudioDownloaded() && _audioPlayer != null ?
             Miniplayer(
+              backgroundColor: Colors.red,
               minHeight: 120,
-              maxHeight: 70,
+              maxHeight: 120,
+              onDismissed: (){},
               builder: (height, percentage) {
                 return AudioControler(_audioPlayer, this.widget.lyrics, () => setState((){}));
               },
