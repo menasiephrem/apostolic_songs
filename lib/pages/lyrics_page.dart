@@ -5,13 +5,16 @@ import 'dart:async';
 
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
+import 'package:apostolic_songs/widgets/audio_controler.dart';
 import 'package:flutter/material.dart';
+import 'package:miniplayer/miniplayer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../finder.dart';
 
@@ -35,6 +38,8 @@ class _LyricsPageState extends State<LyricsPage> {
   bool showProgress = false;
   ReceivePort _port = ReceivePort();
   String downloadPath = "";
+  AudioPlayer _audioPlayer;
+  bool hideFab = false;
 
     @override
     void initState() { 
@@ -47,11 +52,15 @@ class _LyricsPageState extends State<LyricsPage> {
       _bindBackgroundIsolate();
 
       FlutterDownloader.registerCallback(downloadCallback);
+      if(isAudioDownloaded()){
+        _playMusic();
+      }
     }
 
     @override
     void dispose() {
       IsolateNameServer.removePortNameMapping('downloader_send_port');
+      _audioPlayer.stop();
       super.dispose();
     }
 
@@ -118,17 +127,23 @@ class _LyricsPageState extends State<LyricsPage> {
       });
     }
 
-      void _requestDownload() async {
+    bool isAudioDownloaded(){
+        return File(fileLocation()).existsSync();
+    }
+
+    String fileLocation(){
+        String albumid = lyrics.albumId;
+        String albumNumber = albumid.substring(albumid.length - 1);
+        String albumName = albumid.substring(0, albumid.length - 1);
+        return "$downloadPath/$albumName/$albumNumber/" + "${lyrics.trackNumber}.mp3";
+    }
+
+     void _requestDownload() async {
         String albumid = lyrics.albumId;
         String albumNumber = albumid.substring(albumid.length - 1);
         String albumName = albumid.substring(0, albumid.length - 1);
         String url = "https://res.cloudinary.com/evolunt/raw/upload/v1620205036/apostolicSongsMp3/$albumName/$albumNumber/${lyrics.trackNumber}.mp3";
         var syncPath ="$downloadPath/$albumName/$albumNumber/";
-
-        var exists = await File(syncPath +"${lyrics.trackNumber}.mp3").exists() ;
-        if(exists){
-          return;
-        }
         
         final savedDir = Directory(syncPath);
         bool hasExisted = await savedDir.exists();
@@ -170,6 +185,16 @@ class _LyricsPageState extends State<LyricsPage> {
       return "${lyrics.lyricTitle}\n\n${lyrics.lyricText}\n\n";
     }
 
+    _playMusic() async {
+      final player = AudioPlayer();
+      await player.setFilePath(fileLocation());
+      player.play();
+      setState(() {
+        _audioPlayer = player; 
+        hideFab = true;       
+      });
+    }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,32 +215,45 @@ class _LyricsPageState extends State<LyricsPage> {
         ]
       ),
       body:
-      loading? Center(child: CircularProgressIndicator(),):
-      Container(
-       alignment: Alignment.topCenter,
-       padding: EdgeInsets.only(top: 16),
-       child: Flex(
-         direction: Axis.vertical,
-         children: [
-            Expanded(
-            flex: 1,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: GestureDetector(
-                  onScaleStart: (details) {
-                    _baseScaleFactor = _scaleFactor;
-                  },
-                  onScaleUpdate: (details) {
-                    _updateScaleFactor(details.scale);
-                  },
-                  child: Text(lyrics.lyricText, textAlign: TextAlign.center, textScaleFactor: _scaleFactor, ),
-                ),
-              ),
-            ),
-               ( showProgress ? CircularProgressIndicator() : Text("")),
-       ],) 
-    ),
-    floatingActionButton: SpeedDial(
+      Stack(
+        children: [
+            loading? Center(child: CircularProgressIndicator(),):
+            Container(
+            alignment: Alignment.topCenter,
+            padding: EdgeInsets.only(top: 16),
+            child: Flex(
+              direction: Axis.vertical,
+              children: [
+                  Expanded(
+                  flex: 1,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: GestureDetector(
+                        onScaleStart: (details) {
+                          _baseScaleFactor = _scaleFactor;
+                        },
+                        onScaleUpdate: (details) {
+                          _updateScaleFactor(details.scale);
+                        },
+                        child: Text(lyrics.lyricText, textAlign: TextAlign.center, textScaleFactor: _scaleFactor, ),
+                      ),
+                    ),
+                  ),
+                  ( showProgress ? CircularProgressIndicator() : Text("")),                    
+            ],) 
+          ),
+         (
+           isAudioDownloaded() && _audioPlayer != null ?
+            Miniplayer(
+              minHeight: 120,
+              maxHeight: 70,
+              builder: (height, percentage) {
+                return AudioControler(_audioPlayer, this.widget.lyrics, () => setState((){}));
+              },
+          
+          ): Text(""))
+      ],),
+    floatingActionButton: !hideFab? SpeedDial(
       marginEnd: 18,
       marginBottom: 20,
       icon: Icons.add,
@@ -239,13 +277,13 @@ class _LyricsPageState extends State<LyricsPage> {
           onLongPress: () => print('FIRST CHILD LONG PRESS'),
         ),
         SpeedDialChild(
-          child: Icon(Icons.music_note),
+          child: isAudioDownloaded()? Icon(Icons.play_arrow):  Icon(Icons.download_sharp),
           backgroundColor: Colors.orange[100],
-          onTap: () => _requestDownload(),
+          onTap: () => isAudioDownloaded()? _playMusic() :  _requestDownload(),
           onLongPress: () => print('SECOND CHILD LONG PRESS'),
         ),
       ],
-    ),
+    ): Text(""),
     );
   }
 }
