@@ -1,22 +1,21 @@
+import 'dart:math';
+
 import 'package:apostolic_songs/models/lyrics.dart';
-import 'package:apostolic_songs/widgets/seek_bar.dart';
+
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:apostolic_songs/widgets/theme_changer.dart';
 import 'package:provider/provider.dart';
 
 class AudioControler extends StatelessWidget {
-  const AudioControler(this.player, this.lyrics, this.playPause);
-
-  final AudioPlayer player;
+  const AudioControler(this.lyrics, this.playPause);
   final Lyrics lyrics;
   final Function playPause;
   @override
   Widget build(BuildContext context) {
     var _themeProvider = Provider.of<ThemeChanger>(context);
     ThemeData mode = _themeProvider.getTheme;
-    PlayerState playerState = this.player.playerState;
     String title = this.lyrics.lyricTitle;
     String subtitle = this.lyrics.lryicArtist;
     return  Container(
@@ -52,60 +51,129 @@ class AudioControler extends StatelessWidget {
                     ),
                   ],
                 ),
-                IconButton(
-                  icon: Icon(playerState.playing? Icons.pause : Icons.play_arrow ),
-                  iconSize: 50.0,
-                  onPressed: (){
-                    if(playerState.playing) this.player.pause();
-                    else this.player.play();
-                    this.playPause();
-                  } 
-                )
+                 StreamBuilder<bool>(
+                    stream: AudioService.playbackStateStream
+                        .map((state) => state.playing)
+                        .distinct(),
+                    builder: (context, snapshot) {
+                      final playing = snapshot.data ?? false;
+                      return IconButton(
+                            icon: Icon(playing? Icons.pause : Icons.play_arrow ),
+                            iconSize: 50.0,
+                            onPressed: (){
+                              if(playing) AudioService.pause();
+                              else AudioService.play();
+                              this.playPause();
+                            } 
+                          );
+                    },
+                  )
+                
               ],
               
             ),  
-            StreamBuilder<Duration>(
-                stream: this.player.durationStream,
+              StreamBuilder<MediaState>(
+                stream: _mediaStateStream,
                 builder: (context, snapshot) {
-                  final duration = snapshot.data ?? Duration.zero;
-                  return StreamBuilder<PositionData>(
-                    stream: Rx.combineLatest2<Duration, Duration, PositionData>(
-                        this.player.positionStream,
-                        this.player.bufferedPositionStream,
-                        (position, bufferedPosition) =>
-                            PositionData(position, bufferedPosition)),
-                    builder: (context, snapshot) {
-                      final positionData = snapshot.data ??
-                          PositionData(Duration.zero, Duration.zero);
-                      var position = positionData.position;
-                      if (position > duration) {
-                        position = duration;
-                      }
-                      var bufferedPosition = positionData.bufferedPosition;
-                      if (bufferedPosition > duration) {
-                        bufferedPosition = duration;
-                      }
-                      return SeekBar(
-                        duration: duration,
-                        position: position,
-                        bufferedPosition: bufferedPosition,
-                        onChangeEnd: (newPosition) {
-                          this.player.seek(newPosition);
-                        },
-                      );
+                  final mediaState = snapshot.data;
+                  return SeekBar(
+                    duration:
+                    mediaState?.mediaItem?.duration ?? Duration.zero,
+                    position: mediaState?.position ?? Duration.zero,
+                    onChangeEnd: (newPosition) {
+                      print(newPosition);
+                          AudioService.seekTo(newPosition);
                     },
                   );
                 },
-              )        
+              ),      
           ],
         ),
         );
   }
 }
 
-class PositionData {
-  final Duration position;
-  final Duration bufferedPosition;
+  /// A stream reporting the combined state of the current media item and its
+  /// current position.
+  Stream<MediaState> get _mediaStateStream =>
+      Rx.combineLatest2<MediaItem, Duration, MediaState>(
+          AudioService.currentMediaItemStream,
+          AudioService.positionStream,
+          (mediaItem, position) => MediaState(mediaItem, position));
 
-  PositionData(this.position, this.bufferedPosition);
+
+class SeekBar extends StatefulWidget {
+  final Duration duration;
+  final Duration position;
+  final ValueChanged<Duration> onChanged;
+  final ValueChanged<Duration> onChangeEnd;
+
+  SeekBar({
+   this.duration,
+    this.position,
+    this.onChanged,
+    this.onChangeEnd,
+  });
+
+  @override
+  _SeekBarState createState() => _SeekBarState();
+}
+
+class _SeekBarState extends State<SeekBar> {
+  double _dragValue;
+  bool _dragging = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final value = min(_dragValue ?? widget.position.inMilliseconds.toDouble(),
+        widget.duration.inMilliseconds.toDouble());
+    if (_dragValue != null && !_dragging) {
+      _dragValue = null;
+    }
+    return Stack(
+      children: [
+        Slider(
+          min: 0.0,
+          max: widget.duration.inMilliseconds.toDouble(),
+          value: value,
+          onChanged: (value) {
+            if (!_dragging) {
+              _dragging = true;
+            }
+            setState(() {
+              _dragValue = value;
+            });
+            if (widget.onChanged != null) {
+              widget.onChanged(Duration(milliseconds: value.round()));
+            }
+          },
+          onChangeEnd: (value) {
+            if (widget.onChangeEnd != null) {
+              widget.onChangeEnd(Duration(milliseconds: value.round()));
+            }
+            _dragging = false;
+          },
+        ),
+        Positioned(
+          right: 16.0,
+          bottom: 0.0,
+          child: Text(
+              RegExp(r'((^0*[1-9]\d*:)?\d{2}:\d{2})\.\d+$')
+                      .firstMatch("$_remaining")
+                      ?.group(1) ??
+                  '$_remaining',
+              style: Theme.of(context).textTheme.caption),
+        ),
+      ],
+    );
+  }
+
+  Duration get _remaining => widget.duration - widget.position;
+}
+
+class MediaState {
+  final MediaItem mediaItem;
+  final Duration position;
+
+  MediaState(this.mediaItem, this.position);
 }

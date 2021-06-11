@@ -1,5 +1,6 @@
 import 'package:apostolic_songs/pages/spalsh_screen.dart';
 import 'package:apostolic_songs/widgets/theme_changer.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,7 @@ class MaterialAppWithTheme extends StatelessWidget {
     return MaterialApp(
       theme: theme.getTheme,
       debugShowCheckedModeBanner: false,
-      home: HomeSplashScreen(),
+      home: AudioServiceWidget(child: HomeSplashScreen()),
     );
   }
 }

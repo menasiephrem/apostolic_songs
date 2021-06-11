@@ -4,8 +4,11 @@ import 'dart:io';
 import 'dart:async';
 
 import 'package:apostolic_songs/models/lyrics.dart';
+import 'package:apostolic_songs/models/media_item.dart';
+import 'package:apostolic_songs/services/audio_player_task.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:apostolic_songs/widgets/audio_controler.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,7 +17,6 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:just_audio/just_audio.dart';
 
 import '../finder.dart';
 
@@ -26,6 +28,10 @@ class LyricsPage extends StatefulWidget {
   _LyricsPageState createState() => _LyricsPageState();
 }
 
+// NOTE: Your entrypoint MUST be a top-level function.
+void _audioPlayerTaskEntrypoint() async {
+  AudioServiceBackground.run(() => AudioPlayerTask());
+}
 class _LyricsPageState extends State<LyricsPage> {
   LyricsService _lyricsService = locator<LyricsService>();
 
@@ -39,7 +45,7 @@ class _LyricsPageState extends State<LyricsPage> {
   bool showProgress = false;
   ReceivePort _port = ReceivePort();
   String downloadPath = "";
-  AudioPlayer _audioPlayer;
+  bool _showPlayer = false;
   bool hideFab = false;
   int downloadProgress = 0;
 
@@ -62,9 +68,6 @@ class _LyricsPageState extends State<LyricsPage> {
     @override
     void dispose() {
       IsolateNameServer.removePortNameMapping('downloader_send_port');
-      if(_audioPlayer != null){
-        _audioPlayer.stop();
-      }
       super.dispose();
     }
 
@@ -209,14 +212,18 @@ class _LyricsPageState extends State<LyricsPage> {
     }
 
     _playMusic() async {
-      final player = AudioPlayer();
-      await player.setFilePath(fileLocation());
-      player.play();
+        await AudioService.start(
+        backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
+        androidNotificationIcon: 'mipmap/launcher_icon',
+        params: {'path': fileLocation(), 'data': ASMediaItem(lyrics.id, lyrics.lryicArtist, lyrics.lyricTitle, fileLocation(), Uri.parse(
+          "https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg".toLowerCase()),).toJson()},
+      );
       setState(() {
-        _audioPlayer = player; 
+        _showPlayer = true; 
         hideFab = true;       
       });
     }
+
 
   @override
   Widget build(BuildContext context) {
@@ -267,14 +274,14 @@ class _LyricsPageState extends State<LyricsPage> {
             ],) 
           ),
          (
-           isAudioDownloaded() && _audioPlayer != null ?
+           isAudioDownloaded() && _showPlayer ?
             Miniplayer(
               backgroundColor: Colors.red,
               minHeight: 120,
               maxHeight: 120,
               onDismissed: (){},
               builder: (height, percentage) {
-                return AudioControler(_audioPlayer, this.widget.lyrics, () => setState((){}));
+                return  AudioServiceWidget(child: AudioControler(this.widget.lyrics, () => setState((){})));
               },
           
           ): Text(""))
@@ -297,13 +304,13 @@ class _LyricsPageState extends State<LyricsPage> {
       shape: CircleBorder(),
       children: [
         SpeedDialChild(
-          child: isFav?  Icon(Icons.favorite, color: Colors.red[400],) : Icon(Icons.favorite_border),
+          child: isFav?  Icon(Icons.favorite, color: Colors.red[400],) : Icon(Icons.favorite_border, color: Colors.black),
           backgroundColor: Colors.orange[100],
           onTap: () => _setFav(),
           onLongPress: () => print('FIRST CHILD LONG PRESS'),
         ),
         SpeedDialChild(
-          child: isAudioDownloaded()? Icon(Icons.play_arrow):  Icon(Icons.download_sharp),
+          child: isAudioDownloaded()? Icon(Icons.play_arrow, color: Colors.black):  Icon(Icons.download_sharp, color: Colors.black),
           backgroundColor: Colors.orange[100],
           onTap: () => isAudioDownloaded()? _playMusic() :  _requestDownload(),
           onLongPress: () => print('SECOND CHILD LONG PRESS'),

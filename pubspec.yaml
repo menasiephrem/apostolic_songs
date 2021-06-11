@@ -41,6 +41,7 @@ dependencies:
   just_audio: ^0.7.4+1
   miniplayer: ^1.0.0+2
   rxdart: ^0.26.0
+  audio_service: ^0.17.0
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/pages/lyrics_page.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:apostolic_songs/widgets/List/list_item.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
 import '../finder.dart';
@@ -38,7 +39,7 @@ class _FavLyricsListState extends State<FavLyricsList> {
             ListItem(lyric.lyricTitle, lyric.lryicArtist, "/images/${lyric.albumId}.jpg".toLowerCase(), () => {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LyricsPage(lyric)),
+                  MaterialPageRoute(builder: (context) => AudioServiceWidget(child: LyricsPage(lyric))),
               ).then((value){
                 _loadFavLyrics();
               })
