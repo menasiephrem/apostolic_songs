@@ -60,9 +60,7 @@ class _LyricsPageState extends State<LyricsPage> {
       _bindBackgroundIsolate();
 
       FlutterDownloader.registerCallback(downloadCallback);
-      if(isAudioDownloaded()){
-        _playMusic();
-      }
+      _loadCurrentMedaItem();
     }
 
     @override
@@ -87,7 +85,6 @@ class _LyricsPageState extends State<LyricsPage> {
             showProgress = false;        
           });
         }
-        print(progress);
         setState(() {
             downloadProgress = progress;      
         });
@@ -233,6 +230,20 @@ class _LyricsPageState extends State<LyricsPage> {
      new Future.delayed(Duration(seconds: 1),() => AudioService.play());
 
 
+    }
+
+    _loadCurrentMedaItem(){
+      print(AudioService.running);
+      if(AudioService.running) {
+        var item = AudioService.currentMediaItem;
+        if(item?.id == lyrics.id){
+          setState(() {
+            _showPlayer = true; 
+            hideFab = true;  
+            fabLoading = false;   
+          });
+        }
+      }
     }
 
 

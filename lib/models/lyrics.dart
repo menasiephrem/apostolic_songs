@@ -10,5 +10,6 @@ class Lyrics {
     id = "$id",
     lyricTitle = json['lyricTitle'],
     lyricText = json['lyricText'],
-    albumId = json['albumId'];
+    albumId = json['albumId'],
+    trackNumber = json['trackNumber'];
 }
