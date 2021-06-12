@@ -35,6 +35,10 @@ class AudioPlayerTask extends BackgroundAudioTask {
     _audioPlayer.durationStream.listen((duration) {
       _updateQueueWithCurrentDuration(duration);
     });
+
+    _audioPlayer.positionStream.listen((postion) {
+      _checkLastItemPositoin(postion);
+    });
   }
 
   void _loadMediaItemsIntoQueue(Map<String, dynamic> params) {
@@ -51,6 +55,14 @@ class AudioPlayerTask extends BackgroundAudioTask {
     AudioServiceBackground.setMediaItem(_queue[songIndex]);
     AudioServiceBackground.setQueue(_queue);
   }
+
+  void _checkLastItemPositoin(Duration duration) {
+    final songIndex = _audioPlayer.playbackEvent.currentIndex;
+    if(songIndex == _queue.length - 1 &&  _queue[songIndex].duration <= duration){
+      onStop();
+    }
+  }
+
 
   @override
   Future<void> onStop() async {
@@ -84,5 +96,12 @@ class AudioPlayerTask extends BackgroundAudioTask {
         processingState: AudioProcessingState.ready);
     // Pause the audio.
     await _audioPlayer.pause();
+  }
+
+  @override
+  Future<void> onSeekTo(Duration duration) async {
+    // Start playing audio.
+    AudioServiceBackground.setState(position: duration);
+    await _audioPlayer.seek(duration);
   }
 }

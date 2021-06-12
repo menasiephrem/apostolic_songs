@@ -46,7 +46,7 @@ class _LyricsPageState extends State<LyricsPage> {
   ReceivePort _port = ReceivePort();
   String downloadPath = "";
   bool _showPlayer = false;
-  bool hideFab = false;
+  bool hideFab = false, fabLoading = false;
   int downloadProgress = 0;
 
     @override
@@ -212,16 +212,27 @@ class _LyricsPageState extends State<LyricsPage> {
     }
 
     _playMusic() async {
+
+      setState(() {
+        fabLoading = true;
+      });
+      
         await AudioService.start(
         backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
         androidNotificationIcon: 'mipmap/launcher_icon',
         params: {'path': fileLocation(), 'data': ASMediaItem(lyrics.id, lyrics.lryicArtist, lyrics.lyricTitle, fileLocation(), Uri.parse(
           "https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg".toLowerCase()),).toJson()},
       );
+
       setState(() {
-        _showPlayer = true; 
-        hideFab = true;       
+          _showPlayer = true; 
+          hideFab = true;  
+          fabLoading = false;     
       });
+
+     new Future.delayed(Duration(seconds: 1),() => AudioService.play());
+
+
     }
 
 
@@ -281,15 +292,15 @@ class _LyricsPageState extends State<LyricsPage> {
               maxHeight: 120,
               onDismissed: (){},
               builder: (height, percentage) {
-                return  AudioServiceWidget(child: AudioControler(this.widget.lyrics, () => setState((){})));
+                return  AudioServiceWidget(child: AudioControler(this.widget.lyrics, _playMusic));
               },
           
           ): Text(""))
       ],),
-    floatingActionButton: !hideFab? SpeedDial(
+    floatingActionButton: !hideFab? fabLoading? CircularProgressIndicator() : SpeedDial(
       marginEnd: 18,
       marginBottom: 20,
-      icon: Icons.add,
+      icon: fabLoading? Icons.work : Icons.add,
       activeIcon: Icons.remove,
       buttonSize: 56.0,
       visible: true,

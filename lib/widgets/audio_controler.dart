@@ -61,9 +61,12 @@ class AudioControler extends StatelessWidget {
                             icon: Icon(playing? Icons.pause : Icons.play_arrow ),
                             iconSize: 50.0,
                             onPressed: (){
-                              if(playing) AudioService.pause();
-                              else AudioService.play();
+                             if(AudioService.running){
+                               if(playing) AudioService.pause();
+                               else AudioService.play();
+                             }else{
                               this.playPause();
+                             }
                             } 
                           );
                     },
@@ -81,8 +84,7 @@ class AudioControler extends StatelessWidget {
                     mediaState?.mediaItem?.duration ?? Duration.zero,
                     position: mediaState?.position ?? Duration.zero,
                     onChangeEnd: (newPosition) {
-                      print(newPosition);
-                          AudioService.seekTo(newPosition);
+                      AudioService.seekTo(newPosition);
                     },
                   );
                 },
@@ -168,7 +170,7 @@ class _SeekBarState extends State<SeekBar> {
     );
   }
 
-  Duration get _remaining => widget.duration - widget.position;
+  Duration get _remaining => widget.duration > widget.position ? widget.duration - widget.position : Duration.zero;
 }
 
 class MediaState {
