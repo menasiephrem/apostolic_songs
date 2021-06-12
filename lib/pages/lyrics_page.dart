@@ -213,13 +213,29 @@ class _LyricsPageState extends State<LyricsPage> {
       setState(() {
         fabLoading = true;
       });
+
       
+      if(AudioService.running){
+        MediaItem item = MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title: lyrics.lyricTitle, extras:{'path': fileLocation()}, artUri: Uri.parse("https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg"));
+        await AudioService.addQueueItem(item);
+        Fluttertoast.showToast(
+          msg: "Added to Playlist",
+          toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }else{
         await AudioService.start(
-        backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
-        androidNotificationIcon: 'mipmap/launcher_icon',
-        params: {'path': fileLocation(), 'data': ASMediaItem(lyrics.id, lyrics.lryicArtist, lyrics.lyricTitle, fileLocation(), Uri.parse(
-          "https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg".toLowerCase()),).toJson()},
-      );
+          backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
+          androidNotificationIcon: 'mipmap/launcher_icon',
+          params: {'data': MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title:lyrics.lyricTitle, extras:{'path': fileLocation()}, artUri: Uri.parse(
+            "https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg".toLowerCase()),).toJson()},
+        );
+      }
+
 
       setState(() {
           _showPlayer = true; 

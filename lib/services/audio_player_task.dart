@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:apostolic_songs/models/media_item.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -14,21 +12,17 @@ class AudioPlayerTask extends BackgroundAudioTask {
 
   @override
   Future<void> onStart(Map<String, dynamic> params) async {
-    _loadMediaItemsIntoQueue(params);
+     _loadMediaItemsIntoQueue(params);
     // Connect to the URL
     AudioServiceBackground.setState(
-        controls: [MediaControl.play, MediaControl.stop],
+        controls: _getControls(false),
         playing: false,
         processingState: AudioProcessingState.connecting);
-      
-      
         
-      await _audioPlayer.setFilePath(params['path']);
-    // Now we're ready to play
-   // _audioPlayer.play();
+      await _loadPlayer();
 
     AudioServiceBackground.setState(
-        controls: [MediaControl.play, MediaControl.stop],
+        controls: _getControls(false),
         playing: false,
         processingState: AudioProcessingState.ready);
 
@@ -41,10 +35,22 @@ class AudioPlayerTask extends BackgroundAudioTask {
     });
   }
 
-  void _loadMediaItemsIntoQueue(Map<String, dynamic> params) {
+  String _loadMediaItemsIntoQueue(Map<String, dynamic> params) {
     _queue.clear();
-    ASMediaItem mediaItem = ASMediaItem.fromJson(params['data']);
-    queue.add(mediaItem.item);
+    MediaItem mediaItem = MediaItem.fromJson(params['data']);
+    queue.add(mediaItem);
+    return mediaItem.extras['path'];
+  }
+
+  List<MediaControl> _getControls(bool isPlaying){
+    List<MediaControl> ret = [];
+
+    if(_queue.length > 1) ret.add(MediaControl.skipToPrevious);
+    if(isPlaying) ret.add(MediaControl.pause);
+    else ret.add(MediaControl.play);
+    if(_queue.length > 1) ret.add(MediaControl.skipToNext);
+    ret.add(MediaControl.stop);
+    return ret;
   }
 
   void _updateQueueWithCurrentDuration(Duration duration) {
@@ -56,11 +62,18 @@ class AudioPlayerTask extends BackgroundAudioTask {
     AudioServiceBackground.setQueue(_queue);
   }
 
-  void _checkLastItemPositoin(Duration duration) {
-    final songIndex = _audioPlayer.playbackEvent.currentIndex;
-    if(songIndex == _queue.length - 1 &&  _queue[songIndex].duration <= duration){
+  void _checkLastItemPositoin(Duration positon) {
+    if(_audioPlayer.duration == null) return;
+    if(_audioPlayer.duration <= positon){
       onStop();
     }
+  }
+
+  Future<void> _loadPlayer() async{
+     await _audioPlayer.setAudioSource(ConcatenatingAudioSource(
+        children:
+            queue.map((item) => AudioSource.uri(Uri.parse(item.extras['path']))).toList(),
+      ));
   }
 
 
@@ -70,7 +83,7 @@ class AudioPlayerTask extends BackgroundAudioTask {
     await _audioPlayer.stop();
     // Shut down this background task
     AudioServiceBackground.setState(
-        controls: [MediaControl.pause, MediaControl.stop],
+        controls: _getControls(false),
         playing: true,
         processingState: AudioProcessingState.ready);
     await super.onStop();
@@ -80,7 +93,7 @@ class AudioPlayerTask extends BackgroundAudioTask {
   Future<void> onPlay() async {
     // Broadcast that we're playing, and what controls are available.
     AudioServiceBackground.setState(
-        controls: [MediaControl.pause, MediaControl.stop],
+        controls: _getControls(true),
         playing: true,
         processingState: AudioProcessingState.ready);
     // Start playing audio.
@@ -91,7 +104,7 @@ class AudioPlayerTask extends BackgroundAudioTask {
   Future<void> onPause() async {
     // Broadcast that we're paused, and what controls are available.
     AudioServiceBackground.setState(
-        controls: [MediaControl.play, MediaControl.stop],
+        controls: _getControls(false),
         playing: false,
         processingState: AudioProcessingState.ready);
     // Pause the audio.
@@ -103,5 +116,38 @@ class AudioPlayerTask extends BackgroundAudioTask {
     // Start playing audio.
     AudioServiceBackground.setState(position: duration);
     await _audioPlayer.seek(duration);
+  }
+
+  @override
+  Future<void> onSkipToNext() async {
+    if(!_audioPlayer.hasNext) return;
+    _playItem(_audioPlayer.nextIndex);
+  }
+
+  @override
+  Future<void> onSkipToPrevious() async {
+     if(!_audioPlayer.hasPrevious) return;
+    _playItem(_audioPlayer.previousIndex);
+  }
+
+  Future<void> _playItem(int index) async{
+    _audioPlayer.seek(Duration.zero, index: index);
+    _updateQueueWithCurrentDuration(_audioPlayer.duration);
+    AudioServiceBackground.setState(position: Duration.zero);
+  }
+
+  @override
+  Future<void> onAddQueueItem(MediaItem item) async {
+    var index = queue.indexWhere((element) => element.id == item.id);
+    if(index > -1){
+      _playItem(index);
+      return;
+    }
+    queue.add(item);
+    AudioServiceBackground.setMediaItem(item);
+    AudioServiceBackground.setQueue(_queue);
+  
+    await _loadPlayer();
+    _playItem(queue.length - 1);
   }
 }
