@@ -10,6 +10,7 @@ import 'package:apostolic_songs/services/lyrics_service.dart';
 import 'package:apostolic_songs/widgets/audio_controler.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:share/share.dart';
@@ -48,10 +49,12 @@ class _LyricsPageState extends State<LyricsPage> {
   bool _showPlayer = false;
   bool hideFab = false, fabLoading = false;
   int downloadProgress = 0;
+  Box<dynamic> box;
 
     @override
     void initState() { 
       super.initState();
+      _openBox();
       setState(() {
         lyrics = this.widget.lyrics;
       });
@@ -67,6 +70,13 @@ class _LyricsPageState extends State<LyricsPage> {
     void dispose() {
       IsolateNameServer.removePortNameMapping('downloader_send_port');
       super.dispose();
+    }
+
+    void _openBox() async{
+      var b = await Hive.openBox("downloadedSongs");
+      setState(() {
+        box = b;
+      });
     }
 
     void _bindBackgroundIsolate() {
@@ -90,6 +100,7 @@ class _LyricsPageState extends State<LyricsPage> {
         });
 
         if(status ==  DownloadTaskStatus.complete){
+          saveDownload();
           Fluttertoast.showToast(
           msg: "Download Complete",
           toastLength: Toast.LENGTH_SHORT,
@@ -152,7 +163,11 @@ class _LyricsPageState extends State<LyricsPage> {
     }
 
     bool isAudioDownloaded(){
-        return File(fileLocation()).existsSync();
+      return box != null && box.get(lyrics.id, defaultValue: false);
+    }
+
+    void saveDownload(){
+       box?.put(lyrics.id, true);
     }
 
     String fileLocation(){

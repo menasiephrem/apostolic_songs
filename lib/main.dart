@@ -4,6 +4,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'finder.dart';
@@ -12,6 +13,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupFinder();
   initDownloader();
+  initHive();
   _getTheme();
 }
 
@@ -25,6 +27,10 @@ void initDownloader() async{
   await FlutterDownloader.initialize(
     debug: true // optional: set false to disable printing logs to console
   );
+}
+
+void initHive() async{
+  await Hive.initFlutter();
 }
 
 
