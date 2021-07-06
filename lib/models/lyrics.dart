@@ -1,3 +1,5 @@
+import 'package:audio_service/audio_service.dart';
+
 class Lyrics {
   String id;
   String lyricTitle;
@@ -12,4 +14,12 @@ class Lyrics {
     lyricText = json['lyricText'],
     albumId = json['albumId'],
     trackNumber = json['trackNumber'];
+
+   Lyrics.fromMediaItem(MediaItem item) :
+     id = item.id,
+     lyricTitle = item.title,
+     lryicArtist = item.album,
+     albumId = item.extras['albumId'];
+
+    
 }

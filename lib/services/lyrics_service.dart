@@ -96,7 +96,7 @@ class LyricsService {
       return ret;
     }
 
-    Future<Lyrics> loadLyrics(BuildContext context, int id) async {
+    Future<Lyrics> loadLyrics(BuildContext context, String id) async {
       print(id);
       var allAlbums = await _getAlbums(context);
       List<Lyrics> allLyrics = await getAllLyric(context);

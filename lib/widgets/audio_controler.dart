@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:apostolic_songs/models/lyrics.dart';
+import 'package:apostolic_songs/pages/player_page.dart';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,10 @@ import 'package:apostolic_songs/widgets/theme_changer.dart';
 import 'package:provider/provider.dart';
 
 class AudioControler extends StatelessWidget {
-  const AudioControler(this.lyrics, this.playPause);
+  const AudioControler(this.lyrics, this.playPause, this.showOnlyProgress);
   final Lyrics lyrics;
   final Function playPause;
+  final bool showOnlyProgress;
   @override
   Widget build(BuildContext context) {
     var _themeProvider = Provider.of<ThemeChanger>(context);
@@ -20,61 +22,9 @@ class AudioControler extends StatelessWidget {
     String subtitle = this.lyrics.lryicArtist;
     return  Container(
           margin: const EdgeInsets.only(top: 0.0),
-          color: mode.brightness == Brightness.dark ? Colors.grey[800]: Colors.white,
+          color: !showOnlyProgress ? mode.brightness == Brightness.dark ? Colors.grey[800]: Colors.white : null,
           child: Column(children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                  Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(right: 10.0, left: 6.0),
-                      child:   CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/${this.lyrics.albumId}.jpg".toLowerCase()),
-                    radius: 27.0,
-                  ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(title.length > 20 ?
-                        title.substring(0, 20): title,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
-                        Container(
-                          margin: EdgeInsets.only(top: 2.0),
-                          child: Text(subtitle,
-                              style: TextStyle(color: Colors.grey)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                 StreamBuilder<bool>(
-                    stream: AudioService.playbackStateStream
-                        .map((state) => state.playing)
-                        .distinct(),
-                    builder: (context, snapshot) {
-                      final playing = snapshot.data ?? false;
-                      return IconButton(
-                            icon: Icon(playing? Icons.pause : Icons.play_arrow ),
-                            iconSize: 50.0,
-                            onPressed: (){
-                             if(AudioService.running){
-                               if(playing) AudioService.pause();
-                               else AudioService.play();
-                             }else{
-                              this.playPause();
-                             }
-                            } 
-                          );
-                    },
-                  )
-                
-              ],
-              
-            ),  
+            if(!showOnlyProgress) albumArt(title, subtitle, context),  
               StreamBuilder<MediaState>(
                 stream: _mediaStateStream,
                 builder: (context, snapshot) {
@@ -92,6 +42,70 @@ class AudioControler extends StatelessWidget {
           ],
         ),
         );
+  }
+
+  Row albumArt(String title, String subtitle, BuildContext context) {
+    return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+                Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  InkWell(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => PlayerPage()),
+                      );
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 10.0, left: 6.0),
+                      child:   CircleAvatar(
+                      backgroundImage: AssetImage("assets/images/${this.lyrics.albumId}.jpg".toLowerCase()),
+                    radius: 27.0,
+                                  ),
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title.length > 20 ?
+                      title.substring(0, 20): title,
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+                      Container(
+                        margin: EdgeInsets.only(top: 2.0),
+                        child: Text(subtitle,
+                            style: TextStyle(color: Colors.grey)),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+               StreamBuilder<bool>(
+                  stream: AudioService.playbackStateStream
+                      .map((state) => state.playing)
+                      .distinct(),
+                  builder: (context, snapshot) {
+                    final playing = snapshot.data ?? false;
+                    return IconButton(
+                          icon: Icon(playing? Icons.pause : Icons.play_arrow ),
+                          iconSize: 50.0,
+                          onPressed: (){
+                           if(AudioService.running){
+                             if(playing) AudioService.pause();
+                             else AudioService.play();
+                           }else{
+                            this.playPause();
+                           }
+                          } 
+                        );
+                  },
+                )
+              
+            ],
+            
+          );
   }
 }
 
