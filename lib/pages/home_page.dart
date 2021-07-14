@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'chor_albums_list.dart';
+import 'music_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage();
@@ -33,6 +34,8 @@ class _HomePageState extends State<HomePage> {
        return SoloAlbumsList();
       case 2:
        return FavLyricsList();
+      case 3:
+       return MusicPage(); 
       default:
       return Text("");
     }
@@ -82,8 +85,12 @@ class _HomePageState extends State<HomePage> {
             label: 'የግል',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite ),
+            icon: Icon(Icons.favorite),
             label: 'የተመረጡ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.music_note),
+            label: 'መዝሙሮች',
           )
         ],
         currentIndex: _selectedIndex,
