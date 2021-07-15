@@ -25,16 +25,13 @@ class _PlayButtonState extends State<PlayButton> with TickerProviderStateMixin {
   AnimationController _rotationController;
   AnimationController _scaleController;
   double _rotation = 0;
-  double _scale = 0.17;
-
-  bool get _showWaves => !_scaleController.isDismissed;
 
   void _updateRotation() => _rotation = _rotationController.value * 2 * pi;
-  void _updateScale() => _scale = (_scaleController.value * 0.17);
+  void _updateScale() => () {};
 
   @override
   void initState() {
-    isPlaying = true;
+    isPlaying = false;
     _rotationController =
         AnimationController(vsync: this, duration: _kRotationDuration)
           ..addListener(() => setState(_updateRotation))
@@ -48,7 +45,7 @@ class _PlayButtonState extends State<PlayButton> with TickerProviderStateMixin {
   }
 
   void _onToggle(bool playing) {
-    setState(() => isPlaying = !isPlaying);
+    setState(() => isPlaying = !playing);
 
     if (_scaleController.isCompleted) {
       _scaleController.reverse();
@@ -62,50 +59,54 @@ class _PlayButtonState extends State<PlayButton> with TickerProviderStateMixin {
     }
   }
 
-  Widget _buildIcon() {
-   return StreamBuilder<bool>(
-        stream: AudioService.playbackStateStream
-            .map((state) => state.playing)
-            .distinct(),
-        builder: (context, snapshot) {
-          final playing = snapshot.data ?? false;
-          return SizedBox.expand(
-            key: ValueKey<bool>(isPlaying),
-            child: IconButton(
-              icon: playing ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-              onPressed: () => _onToggle(playing),
-            ),
-          );
-      },
+  Widget _buildIcon(bool playing) {
+   return SizedBox.expand(
+      key: ValueKey<bool>(isPlaying),
+      child: IconButton(
+        icon: playing ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+        onPressed: () => _onToggle(playing),
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return AudioService.currentMediaItem.id == widget.itemId ? ConstrainedBox(
-      constraints: BoxConstraints(minWidth: 4, minHeight: 4),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          if (_showWaves) ...[
-            Blob(color: Color(0xff0092ff), scale: _scale, rotation: _rotation),
-            Blob(color: Color(0xff4ac7b7), scale: _scale, rotation: _rotation * 2 - 30),
-            Blob(color: Color(0xffa4a6f6), scale: _scale, rotation: _rotation * 3 - 45),
-          ],
-          Container(
-            constraints: BoxConstraints.expand(),
-            child: AnimatedSwitcher(
-              child: _buildIcon(),
-              duration: _kToggleDuration,
-            ),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.amber,
-            ),
+    if (AudioService.currentMediaItem.id == widget.itemId) {
+      return StreamBuilder<bool>(
+        stream:  AudioService.playbackStateStream
+            .map((state) => state.playing)
+            .distinct(),
+        builder: (context, snapshot) {
+          final playing = snapshot.data ?? false;
+          return ConstrainedBox(
+          constraints: BoxConstraints(minWidth: 4, minHeight: 4),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              if (playing) ...[
+                Blob(color: Color(0xff0092ff), scale: .60, rotation: _rotation),
+                Blob(color: Color(0xff4ac7b7), scale: .60, rotation: _rotation * 2 - 30),
+                Blob(color: Color(0xffa4a6f6), scale: .60, rotation: _rotation * 3 - 45),
+              ],
+              Container(
+                constraints: BoxConstraints.expand(),
+                child: AnimatedSwitcher(
+                  child: _buildIcon(playing),
+                  duration: _kToggleDuration,
+                ),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.amber,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ): Text("");
+          );
+        }
+      );
+    } else {
+      return Text("");
+    }
   }
 
   @override
