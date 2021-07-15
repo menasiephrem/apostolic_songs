@@ -54,10 +54,7 @@ class AudioControler extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => PlayerPage()),
-                      );
+                      // do nothing
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 10.0, left: 6.0),

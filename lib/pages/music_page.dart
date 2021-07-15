@@ -17,7 +17,7 @@ class _MusicPageState extends State<MusicPage> {
         children: [TabBar (
         labelColor: Color(0xffa59671),
         labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
-        tabs: [ Tab(text: "Curret Playing"), Tab(text: "Saved Playlist") ],
+        tabs: [ Tab(text: "በአሁኑ ጊዜ በመጫወት ላይ"), Tab(text: "የተቀመጠ መዝሙር ዝርዝር") ],
       ),
        Expanded(
         child: TabBarView(
