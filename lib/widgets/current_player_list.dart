@@ -1,5 +1,6 @@
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/widgets/audio_controler.dart';
+import 'package:apostolic_songs/widgets/play_blob_button.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:miniplayer/miniplayer.dart';
@@ -16,7 +17,7 @@ class CurrentPlayerList extends StatelessWidget {
           (lyric) => 
             ListItem(lyric.lyricTitle, lyric.lryicArtist, "/images/${lyric.albumId}.jpg".toLowerCase(), () => {
              // Click
-            })
+            }, musicButton: PlayButton(itemId: lyric.id))
         )
         .toList();
   }
