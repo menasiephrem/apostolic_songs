@@ -228,7 +228,7 @@ class _LyricsPageState extends State<LyricsPage> {
 
       
       if(AudioService.running){
-        MediaItem item = MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title: lyrics.lyricTitle, extras:{'path': fileLocation(), 'albumId': lyrics.albumId}, 
+        MediaItem item = MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title: lyrics.lyricTitle, extras:{'path': fileLocation(), 'albumId': lyrics.albumId, 'lyricText': lyrics.lyricText}, 
         artUri: Uri.parse("https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg"));
         await AudioService.addQueueItem(item);
         Fluttertoast.showToast(
@@ -244,7 +244,7 @@ class _LyricsPageState extends State<LyricsPage> {
         await AudioService.start(
           backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
           androidNotificationIcon: 'mipmap/launcher_icon',
-          params: {'data': MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title:lyrics.lyricTitle, extras:{'path': fileLocation(), 'albumId': lyrics.albumId}, artUri: Uri.parse(
+          params: {'data': MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title:lyrics.lyricTitle, extras:{'path': fileLocation(), 'albumId': lyrics.albumId, 'lyricText': lyrics.lyricText}, artUri: Uri.parse(
             "https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg".toLowerCase()),).toJson()},
         );
       }
@@ -316,7 +316,7 @@ class _LyricsPageState extends State<LyricsPage> {
                         onScaleUpdate: (details) {
                           _updateScaleFactor(details.scale);
                         },
-                        child: Text(lyrics.lyricText, textAlign: TextAlign.center, textScaleFactor: _scaleFactor, ),
+                        child: Text(lyrics.lyricText ?? "", textAlign: TextAlign.center, textScaleFactor: _scaleFactor, ),
                       ),
                     ),
                   ),

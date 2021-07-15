@@ -19,6 +19,7 @@ class Lyrics {
      id = item.id,
      lyricTitle = item.title,
      lryicArtist = item.album,
+     lyricText = item.extras['lyricText'],
      albumId = item.extras['albumId'];
 
     

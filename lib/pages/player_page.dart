@@ -5,13 +5,30 @@ import 'package:apostolic_songs/widgets/media_controler/MediaControler.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
+import 'lyrics_page.dart';
+
 class PlayerPage  extends StatelessWidget{  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text("አሁን እየተጫወተ")
+        title: Text("አሁን እየተጫወተ"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.notes),
+            onPressed: () {
+             var item =  AudioService.currentMediaItem;
+             if(item != null) {
+               var lyric = Lyrics.fromMediaItem(item);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  LyricsPage(lyric)),
+              );
+             }
+            },
+          )
+        ]
       ),
       body: 
       StreamBuilder<MediaItem>(
