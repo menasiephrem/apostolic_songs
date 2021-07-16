@@ -28,10 +28,11 @@ class AudioPlayerTask extends BackgroundAudioTask {
 
     _audioPlayer.durationStream.listen((duration) {
       _updateQueueWithCurrentDuration(duration);
+      
     });
 
     _audioPlayer.positionStream.listen((postion) {
-      _checkLastItemPositoin(postion);
+      if(_queue.length == 1) _checkLastItemPositoin(postion);
     });
   }
 
@@ -60,6 +61,7 @@ class AudioPlayerTask extends BackgroundAudioTask {
     _queue[songIndex] = modifiedMediaItem;
     AudioServiceBackground.setMediaItem(_queue[songIndex]);
     AudioServiceBackground.setQueue(_queue);
+    AudioServiceBackground.setState(position: Duration.zero);
   }
 
   void _checkLastItemPositoin(Duration positon) {

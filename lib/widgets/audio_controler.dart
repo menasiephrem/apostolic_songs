@@ -13,6 +13,13 @@ class AudioControler extends StatelessWidget {
   final Lyrics lyrics;
   final Function playPause;
   final bool showOnlyProgress;
+
+  Duration _getPos(MediaState state){
+    if((state?.mediaItem?.duration?.inSeconds ?? 0) - (state?.position?.inSeconds ?? 0) < 1){
+      return Duration.zero;
+    }else return state?.position ?? Duration.zero;
+  }
+
   @override
   Widget build(BuildContext context) {
     var _themeProvider = Provider.of<ThemeChanger>(context);
@@ -31,7 +38,7 @@ class AudioControler extends StatelessWidget {
                   return SeekBar(
                     duration:
                     mediaState?.mediaItem?.duration ?? Duration.zero,
-                    position: mediaState?.position ?? Duration.zero,
+                    position: _getPos(mediaState),
                     onChangeEnd: (newPosition) {
                       AudioService.seekTo(newPosition);
                     },
