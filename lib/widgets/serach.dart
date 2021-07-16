@@ -46,7 +46,7 @@ LyricsService _lyricsService = locator<LyricsService>();
             ListItem(lyric.lyricTitle, lyric.lryicArtist, "/images/${lyric.albumId}.jpg".toLowerCase(), () => {
               Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) =>  AudioServiceWidget(child: LyricsPage(lyric))),
+                  MaterialPageRoute(builder: (context) =>  LyricsPage(lyric)),
               )
             })
         )

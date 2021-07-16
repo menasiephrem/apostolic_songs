@@ -46,7 +46,7 @@ class _LyricsListItemState extends State<LyricsListItem> {
       onTap: (){
          Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AudioServiceWidget(child: LyricsPage(this.widget.lyrics)),
+            MaterialPageRoute(builder: (context) => LyricsPage(this.widget.lyrics),
         )).then((_){
             _isFav();
         });

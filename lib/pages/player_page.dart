@@ -7,9 +7,16 @@ import 'package:flutter/material.dart';
 
 import 'lyrics_page.dart';
 
-class PlayerPage  extends StatelessWidget{  
+class PlayerPage extends StatefulWidget {
+  PlayerPage();
+
   @override
-  Widget build(BuildContext context) {
+  _PlayerPageState createState() => _PlayerPageState();
+}
+
+class _PlayerPageState extends State<PlayerPage> {
+  @override
+  Widget  build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -24,7 +31,9 @@ class PlayerPage  extends StatelessWidget{
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>  LyricsPage(lyric)),
-              );
+              ).then((value){
+                setState((){});
+              });
              }
             },
           )
@@ -34,9 +43,14 @@ class PlayerPage  extends StatelessWidget{
       StreamBuilder<MediaItem>(
       stream: AudioService.currentMediaItemStream,
       builder: (context, snapshot) {
+        if(snapshot.hasError){
+          print(snapshot.error);
+        }
+        print(snapshot.connectionState);
         MediaItem item = snapshot.data;
         if(item == null) return Center(child: CircularProgressIndicator(),);
         Lyrics _lyrics = Lyrics.fromMediaItem(item);
+        
         return Column(
               children:[
                 SizedBox(height: 30),
@@ -58,7 +72,7 @@ class PlayerPage  extends StatelessWidget{
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400, color: Colors.grey)
                 ),
                 SizedBox(height: 15),
-                AudioServiceWidget(child: AudioControler(_lyrics, (){}, true)),
+                AudioControler(_lyrics, (){}, true),
                 SizedBox(height: 45),
                 MusicBoardControls()
               ]

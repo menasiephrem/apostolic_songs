@@ -68,7 +68,7 @@ class CurrentPlayerList extends StatelessWidget {
               maxHeight: 120,
               onDismissed: (){},
               builder: (height, percentage) {
-                return  AudioServiceWidget(child: AudioControler(lyrics, (){}, false));
+                return AudioControler(lyrics, (){}, false);
               },
             )
           );

@@ -331,7 +331,7 @@ class _LyricsPageState extends State<LyricsPage> {
               maxHeight: 120,
               onDismissed: (){},
               builder: (height, percentage) {
-                return  AudioServiceWidget(child: AudioControler(this.widget.lyrics, _playMusic, false));
+                return  AudioControler(this.widget.lyrics, _playMusic, false);
               },
           
           ): Text(""))

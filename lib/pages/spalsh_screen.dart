@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:apostolic_songs/pages/home_page.dart';
 import 'package:apostolic_songs/widgets/theme_changer.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +29,7 @@ class _HomeSplashScreenState extends State<HomeSplashScreen> with TickerProvider
         Duration(milliseconds: 2200),
             () {
           Navigator.of(context)
-          .pushReplacement( MaterialPageRoute(builder: (BuildContext context) => HomePage() ));
+          .pushReplacement( MaterialPageRoute(builder: (BuildContext context) => AudioServiceWidget(child: HomePage())));
             }
     );
   }
