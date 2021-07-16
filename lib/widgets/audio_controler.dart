@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:apostolic_songs/models/lyrics.dart';
-import 'package:apostolic_songs/pages/player_page.dart';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
