@@ -60,16 +60,22 @@ class LyricsService {
     }
 
     Future<List<Lyrics>> getFav(BuildContext context) async {
-      List<Lyrics> fav = [];
-      List<Lyrics> allLyrics = await getAllLyric(context);
-      List<Album> allAlbums = await _getAlbums(context);
       final prefs = await SharedPreferences.getInstance();
       List<String> lyricsInPref = prefs.getKeys().toList();
 
       lyricsInPref.removeWhere((st) => st == "theme");
       lyricsInPref.removeWhere((st) => st == "font");
 
-      for(String key in lyricsInPref){
+      return await getLyricsFromIds(context, lyricsInPref);
+    }
+
+    Future<List<Lyrics>> getLyricsFromIds(BuildContext context, List<String> ids)async{
+      List<Lyrics> fav = [];
+      
+      List<Lyrics> allLyrics = await getAllLyric(context);
+      List<Album> allAlbums = await _getAlbums(context);
+
+      for(String key in ids){
         var lyric = allLyrics.firstWhere((l) => l.id == key);
         if(lyric != null){
           var album = allAlbums.firstWhere((a) => a.albumId == lyric.albumId);

@@ -8,6 +8,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'finder.dart';
+import 'models/playlist.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,7 @@ void initDownloader() async{
 
 void initHive() async{
   await Hive.initFlutter();
+  Hive.registerAdapter(PlaylistAdapter());
 }
 
 

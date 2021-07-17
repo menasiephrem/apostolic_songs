@@ -1,4 +1,5 @@
 import 'package:apostolic_songs/widgets/current_player_list.dart';
+import 'package:apostolic_songs/widgets/playlist_list.dart';
 import 'package:flutter/material.dart';
 
 class MusicPage extends StatefulWidget {
@@ -32,15 +33,7 @@ class _MusicPageState extends State<MusicPage> {
   _getTabChildren() {
     return [
       CurrentPlayerList(),
-      Center(
-        child: SizedBox(
-          height: 300,
-          width: MediaQuery.of(context).size.width - 40,
-          child: Image.asset(
-              "assets/images/no_music.png",
-              alignment: Alignment.center,
-            )
-      ))
+      SavedPlaylists()
     ];
   }
 }

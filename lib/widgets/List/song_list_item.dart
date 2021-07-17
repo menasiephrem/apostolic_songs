@@ -1,7 +1,6 @@
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/pages/lyrics_page.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../finder.dart';

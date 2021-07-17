@@ -168,17 +168,10 @@ class _LyricsPageState extends State<LyricsPage> {
        box?.put(lyrics.id, true);
     }
 
-    String fileLocation(){
-        String albumNumber = lyrics.albumId.replaceAll(new RegExp(r'[^0-9]'),'');
-        String albumName = lyrics.albumId.toLowerCase().replaceAll(new RegExp(r'[^a-z]'),'');
-        return "$downloadPath/$albumName/$albumNumber/" + "${lyrics.trackNumber}.mp3";
-    }
-
      void _requestDownload() async {
         String albumNumber = lyrics.albumId.replaceAll(new RegExp(r'[^0-9]'),'');
         String albumName = lyrics.albumId.toLowerCase().replaceAll(new RegExp(r'[^a-z]'),'');
         String url = "https://res.cloudinary.com/evolunt/raw/upload/v1620205036/apostolicSongsMp3/$albumName/$albumNumber/${lyrics.trackNumber}.mp3";
-        print(url);
         var syncPath ="$downloadPath/$albumName/$albumNumber/";
         
         final savedDir = Directory(syncPath);
@@ -228,8 +221,7 @@ class _LyricsPageState extends State<LyricsPage> {
 
       
       if(AudioService.running){
-        MediaItem item = MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title: lyrics.lyricTitle, extras:{'path': fileLocation(), 'albumId': lyrics.albumId, 'lyricText': lyrics.lyricText}, 
-        artUri: Uri.parse("https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg"));
+        MediaItem item = lyrics.toMediaItem(downloadPath);
         await AudioService.addQueueItem(item);
         Fluttertoast.showToast(
           msg: "Added to Playlist",
@@ -241,11 +233,11 @@ class _LyricsPageState extends State<LyricsPage> {
             fontSize: 16.0
         );
       }else{
+        AudioService.connect();
         await AudioService.start(
           backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
           androidNotificationIcon: 'mipmap/launcher_icon',
-          params: {'data': MediaItem(id: lyrics.id, album: lyrics.lryicArtist, title:lyrics.lyricTitle, extras:{'path': fileLocation(), 'albumId': lyrics.albumId, 'lyricText': lyrics.lyricText}, artUri: Uri.parse(
-            "https://res.cloudinary.com/evolunt/image/upload/c_thumb,w_200,g_face/v1623426697/albumArts/${lyrics.albumId}.jpg".toLowerCase()),).toJson()},
+          params: {'data': lyrics.toMediaItem(downloadPath).toJson()},
         );
       }
 

@@ -22,8 +22,6 @@ class _ListItemState extends State<ListItem> {
   String userName;
   String lastMessage;
 
-
-
   buildAvater(String imagAddress){
     return  CircleAvatar(
               backgroundImage: AssetImage('assets$imagAddress'),
