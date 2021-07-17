@@ -159,4 +159,15 @@ class AudioPlayerTask extends BackgroundAudioTask {
     await _loadPlayer();
     _playItem(queue.length - 1);
   }
+
+  @override
+  Future<void> onUpdateQueue(List<MediaItem> list) async {
+    queue.clear();
+    queue.addAll(list);
+    AudioServiceBackground.setMediaItem(list[0]);
+    AudioServiceBackground.setQueue(_queue);
+  
+    await _loadPlayer();
+    _playItem(0);
+  }
 }

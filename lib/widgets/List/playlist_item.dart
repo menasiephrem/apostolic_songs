@@ -1,7 +1,10 @@
 import 'package:apostolic_songs/models/lyrics.dart';
 import 'package:apostolic_songs/models/playlist.dart';
+import 'package:apostolic_songs/services/audio_player_task.dart';
 import 'package:apostolic_songs/services/lyrics_service.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -9,11 +12,17 @@ import '../../finder.dart';
 import '../theme_changer.dart';
 
 class PlaylistItem extends StatefulWidget {
-  PlaylistItem(this.playlist);
+  PlaylistItem(this.playlist, this.downloadPath);
 
   final Playlist playlist;
+  final String downloadPath;
   @override
   _PlaylistItemState createState() => _PlaylistItemState();
+}
+
+// NOTE: Your entrypoint MUST be a top-level function.
+void _audioPlayerTaskEntrypoint() async {
+  AudioServiceBackground.run(() => AudioPlayerTask());
 }
 
 class _PlaylistItemState extends State<PlaylistItem> {
@@ -43,6 +52,36 @@ class _PlaylistItemState extends State<PlaylistItem> {
             );
   }
 
+  _playListItem() async {
+
+    Fluttertoast.showToast(
+      msg: "Playing Playlist",
+      toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    List<MediaItem> mediaItems = [];
+    for(Lyrics lyric in lyrics){
+      mediaItems.add(lyric.toMediaItem(widget.downloadPath));
+    }
+
+    if(!AudioService.running){
+      AudioService.connect();
+      await AudioService.start(
+        backgroundTaskEntrypoint: _audioPlayerTaskEntrypoint,
+        androidNotificationIcon: 'mipmap/launcher_icon',
+        params: {'data': mediaItems[0].toJson()},
+      );
+    }
+
+    await AudioService.updateQueue(mediaItems);
+
+    new Future.delayed(Duration(microseconds: 500),() => AudioService.play());
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -50,6 +89,7 @@ class _PlaylistItemState extends State<PlaylistItem> {
     ThemeData mode = _themeProvider.getTheme;
     return Container(
        child: InkWell(
+         onTap: _playListItem,
          child: Container(
            child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
