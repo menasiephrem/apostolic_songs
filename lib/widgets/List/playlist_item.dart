@@ -52,7 +52,7 @@ class _PlaylistItemState extends State<PlaylistItem> {
             );
   }
 
-  _playListItem() async {
+  _playListItem(BuildContext context) async {
 
     Fluttertoast.showToast(
       msg: "Playing Playlist",
@@ -80,6 +80,7 @@ class _PlaylistItemState extends State<PlaylistItem> {
     await AudioService.updateQueue(mediaItems);
 
     new Future.delayed(Duration(microseconds: 500),() => AudioService.play());
+    DefaultTabController.of(context).animateTo(0);
   }
 
   @override
@@ -89,7 +90,7 @@ class _PlaylistItemState extends State<PlaylistItem> {
     ThemeData mode = _themeProvider.getTheme;
     return Container(
        child: InkWell(
-         onTap: _playListItem,
+         onTap: () => _playListItem(context),
          child: Container(
            child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
