@@ -1,14 +1,20 @@
 import 'package:apostolic_songs/pages/spalsh_screen.dart';
 import 'package:apostolic_songs/widgets/theme_changer.dart';
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'finder.dart';
+import 'models/playlist.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupFinder();
+  initDownloader();
+  initHive();
   _getTheme();
 }
 
@@ -16,6 +22,17 @@ void _getTheme() async {
   final prefs = await SharedPreferences.getInstance();
   bool theme = prefs.getBool("theme");
   runApp(MyApp(theme == null ? false : theme));
+}
+
+void initDownloader() async{
+  await FlutterDownloader.initialize(
+    debug: true // optional: set false to disable printing logs to console
+  );
+}
+
+void initHive() async{
+  await Hive.initFlutter();
+  Hive.registerAdapter(PlaylistAdapter());
 }
 
 
@@ -39,7 +56,7 @@ class MaterialAppWithTheme extends StatelessWidget {
     return MaterialApp(
       theme: theme.getTheme,
       debugShowCheckedModeBanner: false,
-      home: HomeSplashScreen(),
+      home: AudioServiceWidget(child: HomeSplashScreen()),
     );
   }
 }

@@ -52,6 +52,8 @@ class _FavLyricsListState extends State<FavLyricsList> {
     return Container(
        child:
         favLyrics != null?
+          favLyrics.length == 0 ?
+          Center(child: Text("ምንም የተምረጡ መዝሙሮች የሉም 😔")):
           ListView(
             children: _genrateSongListItem(context),
           ): 

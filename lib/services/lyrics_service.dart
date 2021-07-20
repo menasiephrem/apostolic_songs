@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LyricsService {
 
   Future<List<Album>> _getAlbums(BuildContext context) async{
-    List<Album> fromJson = List();
+    List<Album> fromJson = [];
     var value = await DefaultAssetBundle.of(context)
         .loadString("data/Album.json");
         var albumsJson = json.decode(value);   
@@ -20,7 +20,7 @@ class LyricsService {
   }
 
     Future<List<Lyrics>> getAllLyric(BuildContext context) async{
-      List<Lyrics> fromJson = List();
+      List<Lyrics> fromJson = [];
       var value = await DefaultAssetBundle.of(context)
           .loadString("data/Lyrics.json");
           var lyricJson = json.decode(value);   
@@ -34,7 +34,7 @@ class LyricsService {
     Future<List<Lyrics>> getAlbumLyric(BuildContext context, String albumId) async{
       List<Lyrics> allLyrics = await getAllLyric(context);
       var albumLyrcs = allLyrics.where((lyric) => lyric.albumId == albumId ).toList();
-      List<Lyrics> ret = List();
+      List<Lyrics> ret = [];
       for(int i = 0; i < albumLyrcs.length; i++){
         var l = albumLyrcs[i];
         l.trackNumber = i + 1;
@@ -60,16 +60,22 @@ class LyricsService {
     }
 
     Future<List<Lyrics>> getFav(BuildContext context) async {
-      List<Lyrics> fav = List();
-      List<Lyrics> allLyrics = await getAllLyric(context);
-      List<Album> allAlbums = await _getAlbums(context);
       final prefs = await SharedPreferences.getInstance();
       List<String> lyricsInPref = prefs.getKeys().toList();
 
       lyricsInPref.removeWhere((st) => st == "theme");
       lyricsInPref.removeWhere((st) => st == "font");
 
-      for(String key in lyricsInPref){
+      return await getLyricsFromIds(context, lyricsInPref);
+    }
+
+    Future<List<Lyrics>> getLyricsFromIds(BuildContext context, List<String> ids)async{
+      List<Lyrics> fav = [];
+      
+      List<Lyrics> allLyrics = await getAllLyric(context);
+      List<Album> allAlbums = await _getAlbums(context);
+
+      for(String key in ids){
         var lyric = allLyrics.firstWhere((l) => l.id == key);
         if(lyric != null){
           var album = allAlbums.firstWhere((a) => a.albumId == lyric.albumId);
@@ -81,7 +87,7 @@ class LyricsService {
     }
 
     Future<List<Lyrics>> searchLyrics(BuildContext context, String query) async {
-      List<Lyrics> ret = List();
+      List<Lyrics> ret = [];
       var regex = RegExp(r''+ query, caseSensitive: false);
       var allAlbums = await _getAlbums(context);
       List<Lyrics> allLyrics = await getAllLyric(context);
@@ -96,7 +102,7 @@ class LyricsService {
       return ret;
     }
 
-    Future<Lyrics> loadLyrics(BuildContext context, int id) async {
+    Future<Lyrics> loadLyrics(BuildContext context, String id) async {
       print(id);
       var allAlbums = await _getAlbums(context);
       List<Lyrics> allLyrics = await getAllLyric(context);
